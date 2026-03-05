@@ -559,9 +559,11 @@
   .ai-card::after {
     content: '';
     position: absolute;
-    bottom: 0; right: 0;
-    width: 60px; height: 60px;
-    background: radial-gradient(circle at bottom right, rgba(232,83,10,0.08), transparent);
+    bottom: -90px; right: -90px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,83,10,0.14) 0%, rgba(232,83,10,0.07) 32%, rgba(232,83,10,0.03) 55%, rgba(232,83,10,0) 72%);
+    pointer-events: none;
   }
 
   .ai-card h4 {
@@ -675,6 +677,11 @@
     list-style: none;
   }
 
+  .nav-links li {
+    display: flex;
+    align-items: center;
+  }
+
   .nav-links a {
     font-family: var(--mono);
     font-size: 0.65rem;
@@ -686,6 +693,17 @@
   }
 
   .nav-links a:hover { color: var(--accent); }
+
+  .nav-divider {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+    user-select: none;
+  }
 
   @media (max-width: 600px) {
     .nav-links { display: none; }
@@ -731,6 +749,8 @@
     <li><a href="#phases">Phases</a></li>
     <li><a href="#software">Software</a></li>
     <li><a href="#ai">AI Layer</a></li>
+    <li class="nav-divider">||</li>
+    <li><a href="Research/index.html">Research</a></li>
   </ul>
 </nav>
 
