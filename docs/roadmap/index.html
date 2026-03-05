@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project IRONLOOP - Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --accent2: #f0920a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --muted: #4a5568;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: 0 -2rem;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,11,13,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-links .active {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(232,83,10,0.55);
+    padding-bottom: 0.25rem;
+  }
+
+  .hero {
+    padding: 4.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.7rem, 9vw, 5.7rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .title span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+
+  .sub {
+    margin-top: 1rem;
+    color: var(--text-dim);
+    max-width: 780px;
+    font-size: 0.95rem;
+  }
+
+  .phase-strip {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    background: var(--border);
+  }
+
+  .phase-strip-card {
+    background: var(--surface);
+    padding: 0.95rem;
+  }
+
+  .phase-strip-card h3 {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .phase-status {
+    margin-top: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .phase-status.done { color: var(--green); }
+  .phase-status.active { color: var(--accent2); }
+  .phase-status.pending { color: var(--blue); }
+
+  .content {
+    padding-top: 2.5rem;
+    display: grid;
+    gap: 1.3rem;
+  }
+
+  .phase-card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .phase-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, rgba(24,28,35,0.85), rgba(17,19,24,0.92));
+    padding: 1rem 1.15rem;
+  }
+
+  .phase-id {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .phase-name {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .phase-pill {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid;
+    padding: 0.28rem 0.55rem;
+    white-space: nowrap;
+  }
+
+  .phase-pill.done {
+    color: var(--green);
+    border-color: rgba(12,240,122,0.35);
+    background: rgba(12,240,122,0.08);
+  }
+
+  .phase-pill.active {
+    color: var(--accent2);
+    border-color: rgba(240,146,10,0.35);
+    background: rgba(240,146,10,0.08);
+  }
+
+  .phase-pill.pending {
+    color: var(--blue);
+    border-color: rgba(10,180,240,0.35);
+    background: rgba(10,180,240,0.08);
+  }
+
+  .phase-body {
+    padding: 1rem 1.15rem 1.1rem;
+  }
+
+  .phase-body p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .check-grid {
+    margin-top: 0.95rem;
+    border: 1px solid var(--border);
+    background: #0d1116;
+  }
+
+  .check-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.8rem;
+    align-items: center;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid rgba(30,37,48,0.75);
+  }
+
+  .check-row:last-child { border-bottom: none; }
+
+  .mark {
+    width: 1rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .check-row.done .mark { color: var(--green); }
+  .check-row.pending .mark { color: var(--accent2); }
+
+  .check-row .label {
+    font-family: var(--mono);
+    font-size: 0.73rem;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .check-row .tag {
+    font-family: var(--mono);
+    font-size: 0.57rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid rgba(74,85,104,0.5);
+    padding: 0.2rem 0.42rem;
+  }
+
+  .check-row.done .tag {
+    color: var(--green);
+    border-color: rgba(12,240,122,0.35);
+  }
+
+  .check-row.pending .tag {
+    color: var(--accent2);
+    border-color: rgba(240,146,10,0.35);
+  }
+
+  .progress-wrap {
+    margin-top: 1rem;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.35rem;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #0d1116;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 82%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .footer {
+    margin-top: 2.4rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 920px) {
+    .phase-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 680px) {
+    .page { padding: 0 1rem 3rem; }
+    .nav { margin: 0 -1rem; padding: 0.85rem 1rem; }
+    .nav-links { gap: 0.8rem; }
+    .phase-strip { grid-template-columns: 1fr; }
+    .phase-head { flex-wrap: wrap; }
+    .phase-name { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="nav-logo">// IRONLOOP</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../research/index.html">Research</a></li>
+        <li><a class="active" href="./index.html">Roadmap</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">Execution Plan</div>
+      <h1 class="title">Project <span>Roadmap</span></h1>
+      <p class="sub">
+        End-to-end delivery path for IRONLOOP from software-only simulation output through bench hardware loop and
+        AI-assisted map optimization. Phase 1 software is largely complete; Phase 1 hardware validation is still open.
+      </p>
+
+      <div class="phase-strip">
+        <article class="phase-strip-card">
+          <h3>Phase 1</h3>
+          <div class="phase-status active">In Progress</div>
+        </article>
+        <article class="phase-strip-card">
+          <h3>Phase 2</h3>
+          <div class="phase-status pending">Queued</div>
+        </article>
+        <article class="phase-strip-card">
+          <h3>Phase 3</h3>
+          <div class="phase-status pending">Queued</div>
+        </article>
+        <article class="phase-strip-card">
+          <h3>Phase 4</h3>
+          <div class="phase-status pending">Queued</div>
+        </article>
+        <article class="phase-strip-card">
+          <h3>Phase 5</h3>
+          <div class="phase-status pending">Queued</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content">
+      <article class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-id">Phase 01</div>
+            <div class="phase-name">Patch engine-sim -> state output</div>
+          </div>
+          <div class="phase-pill active">In Progress</div>
+        </div>
+        <div class="phase-body">
+          <p>Main software objective is done. Remaining blocker is end-of-phase hardware validation on the real bench path.</p>
+
+          <div class="check-grid">
+            <div class="check-row done">
+              <div class="mark">[x]</div>
+              <div class="label">Build forked engine-sim and run local executable</div>
+              <div class="tag">Complete</div>
+            </div>
+            <div class="check-row done">
+              <div class="mark">[x]</div>
+              <div class="label">Add UDP state broadcaster and wire it into sim loop</div>
+              <div class="tag">Complete</div>
+            </div>
+            <div class="check-row done">
+              <div class="mark">[x]</div>
+              <div class="label">Define schema v1 (rpm, throttle, MAP, AFR, O2, temps) and document contract</div>
+              <div class="tag">Complete</div>
+            </div>
+            <div class="check-row done">
+              <div class="mark">[x]</div>
+              <div class="label">Implement Python receiver and signal generator with stub/console/csv/pi sinks</div>
+              <div class="tag">Complete</div>
+            </div>
+            <div class="check-row done">
+              <div class="mark">[x]</div>
+              <div class="label">Calibrate bridge mapping (ECT/IAT remap, narrowband O2 model) and validate by CSV</div>
+              <div class="tag">Complete</div>
+            </div>
+            <div class="check-row pending">
+              <div class="mark">[ ]</div>
+              <div class="label">Bench-validate with real MCP4728/MCP4131/Pico + ME7 harness hardware chain</div>
+              <div class="tag">Pending</div>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Phase 01 Completion</span>
+              <span>5 / 6 checkpoints</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-id">Phase 02</div>
+            <div class="phase-name">Fake easy sensors -> ECU powers on</div>
+          </div>
+          <div class="phase-pill pending">Planned</div>
+        </div>
+        <div class="phase-body">
+          <p>Drive TPS/MAP/O2 analog outputs plus NTC thermistor emulation into ME7 and clear basic sensor faults.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-id">Phase 03</div>
+            <div class="phase-name">Crank + cam signal -> ECU runs</div>
+          </div>
+          <div class="phase-pill pending">Planned</div>
+        </div>
+        <div class="phase-body">
+          <p>Generate stable 60-2 crank and cam sync patterns through dedicated hardware and confirm injector outputs.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-id">Phase 04</div>
+            <div class="phase-name">Close loop -> ECU affects simulation</div>
+          </div>
+          <div class="phase-pill pending">Planned</div>
+        </div>
+        <div class="phase-body">
+          <p>Read ECU outputs back and feed those dynamics into engine-sim to make the loop behaviorally real.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-head">
+          <div>
+            <div class="phase-id">Phase 05</div>
+            <div class="phase-name">AI tuning layer</div>
+          </div>
+          <div class="phase-pill pending">Planned</div>
+        </div>
+        <div class="phase-body">
+          <p>Run large automated virtual dyno sweeps and optimize calibration strategy before touching a real vehicle.</p>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      Roadmap status source: live project progress docs and phase tracker updates
+    </footer>
+  </div>
+</body>
+</html>
