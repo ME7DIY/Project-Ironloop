@@ -197,6 +197,22 @@
   }
 
   /* ── CONCEPT / LOOP DIAGRAM ──────────── */
+  .concept-plain {
+    max-width: 760px;
+    margin: -0.5rem 0 2rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(12,240,122,0.28);
+    background: linear-gradient(90deg, rgba(12,240,122,0.09), rgba(12,240,122,0.02));
+    color: #d2fbe8;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+    text-transform: uppercase;
+  }
+
+  .concept-plain strong { color: var(--green); }
+
   .loop-diagram {
     display: grid;
     gap: 0;
@@ -784,6 +800,10 @@
     <p style="max-width:720px; color: var(--text-dim); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2.5rem;">
       The goal is to close the loop between a virtual combustion engine running in <strong style="color:var(--text)">ange-yaghi/engine-sim</strong> and a real Bosch ME7.5 ECU sitting on a bench. The ECU receives electrically-accurate fake sensor signals generated from the simulation state. The ECU's outputs — injector timing, ignition advance, idle valve position — are read back and fed into the simulation, affecting engine behavior. This is what automotive engineers call a Hardware-in-the-Loop (HIL) rig. Professional versions cost $100k+. This version costs under $200.
     </p>
+
+    <div class="concept-plain">
+      Plain English: this is a <strong>bench-safe tuning practice tool</strong>. You can learn by trial and error against a virtual engine loop before touching a real car.
+    </div>
 
     <div class="loop-diagram">
 
