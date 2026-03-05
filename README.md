@@ -3,14 +3,11 @@
 
 > A DIY Hardware-in-the-Loop simulation rig bridging open-source combustion simulation to a real Bosch ME7.5 engine control unit via direct pin-level signal injection.
 
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![Hardware](https://img.shields.io/badge/hardware-Raspberry%20Pi%205%20%2F%20Pico-red)
+![Status](https://img.shields.io/badge/status-in%20development-yellow) | ![License](https://img.shields.io/badge/license-MIT-green) | ![Python](https://img.shields.io/badge/python-3.8%2B-blue) | ![Hardware](https://img.shields.io/badge/hardware-Raspberry%20Pi%205%20%2F%20Pico-red)
 
 ---
 
-## 🎯 The Vision
+## The Vision
 
 IRONLOOP is an open-source, budget-friendly Hardware-in-the-Loop (HIL) platform that lets you:
 
@@ -23,7 +20,7 @@ Professional HIL rigs cost **$100k+**. This version costs under **$200**.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Project Overview](#project-overview)
 - [Hardware Stack](#hardware-stack)
@@ -36,7 +33,7 @@ Professional HIL rigs cost **$100k+**. This version costs under **$200**.
 
 ---
 
-## 🔧 Project Overview
+## Project Overview
 
 ### The Loop
 
@@ -60,7 +57,7 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ---
 
-## 💰 Hardware Stack
+## Hardware Stack
 
 | Component | Part | Cost |
 |-----------|------|------|
@@ -76,7 +73,7 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ---
 
-## 🏗️ Build Phases
+## Build Phases
 
 ### **Phase 01: Patch engine-sim — State Output** (1–2 Weekends)
 - Fork engine-sim and add local UDP/TCP socket broadcast
@@ -127,22 +124,22 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ---
 
-## 📡 Sensors & Signals
+## Sensors & Signals
 
 | Signal | Type | Difficulty | Notes |
 |--------|------|-----------|-------|
-| **TPS** (Throttle) | 0–5V Analog | 🟢 Easy | DAC output |
-| **MAP** (Manifold Pressure) | 0–5V Analog | 🟢 Easy | Linear curve |
-| **MAF** (Air Flow) | 0–5V Analog | 🟢 Easy | From sim air mass |
-| **ECT** (Coolant Temp) | NTC Resistance | 🟢 Easy | Digital pot emulation |
-| **IAT** (Intake Temp) | NTC Resistance | 🟢 Easy | Digital pot emulation |
-| **O2 / Lambda** | 0–1V Analog | 🟡 Medium | Narrowband behavior |
-| **Cam Sync** | Digital Pulse | 🟡 Medium | 1 pulse/cam rev, phase-aligned |
-| **Crank — 60-2** | Hard Real-Time Digital | 🔴 Hard | **Sub-millisecond precision; Pico PIO only** |
+| **TPS** (Throttle) | 0–5V Analog | Easy | DAC output |
+| **MAP** (Manifold Pressure) | 0–5V Analog | Easy | Linear curve |
+| **MAF** (Air Flow) | 0–5V Analog | Easy | From sim air mass |
+| **ECT** (Coolant Temp) | NTC Resistance | Easy | Digital pot emulation |
+| **IAT** (Intake Temp) | NTC Resistance | Easy | Digital pot emulation |
+| **O2 / Lambda** | 0–1V Analog | Medium | Narrowband behavior |
+| **Cam Sync** | Digital Pulse | Medium | 1 pulse/cam rev, phase-aligned |
+| **Crank — 60-2** | Hard Real-Time Digital | Hard | **Sub-millisecond precision; Pico PIO only** |
 
 ---
 
-## 🏛️ Architecture
+## Architecture
 
 ### Component Layout
 
@@ -193,7 +190,7 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -244,7 +241,7 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ---
 
-## 📂 Directory Structure
+## Directory Structure
 
 ```
 Project-Ironloop/
@@ -273,7 +270,7 @@ Project-Ironloop/
 
 ---
 
-## 🔬 Research & Documentation
+## Research & Documentation
 
 Extensive research materials are organized by phase in the `Research/` directory:
 
@@ -286,7 +283,7 @@ Extensive research materials are organized by phase in the `Research/` directory
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Whether you're:
 - **Fixing bugs** in the control loop
@@ -304,19 +301,19 @@ Please:
 
 ---
 
-## ⚠️ Safety & Disclaimer
+## Safety & Disclaimer
 
 **This is experimental hardware and firmware.** Testing should occur:
-- ✅ On a workbench with the ECU isolated from any actual engine
-- ✅ In a controlled lab environment
-- ✅ With proper test equipment (logic analyzer, oscilloscope, power supplies)
-- ✅ With full understanding of ECU timing and safety considerations
+- On a workbench with the ECU isolated from any actual engine
+- In a controlled lab environment
+- With proper test equipment (logic analyzer, oscilloscope, power supplies)
+- With full understanding of ECU timing and safety considerations
 
 **Do not** attempt to use this system on a real running engine without extensive validation and professional guidance. Automotive safety is critical.
 
 ---
 
-## 📚 References & Acknowledgments
+## References & Acknowledgments
 
 - **engine-sim** by Ange Yaghi — [https://github.com/ange-yaghi/engine-sim](https://github.com/ange-yaghi/engine-sim)
 - **Bosch ME7.5 Community** — nefmoto docs, MPPS, ME7 tuner forums
@@ -325,7 +322,7 @@ Please:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
@@ -336,7 +333,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-## 📞 Get Involved
+## Get Involved
 
 - **GitHub Issues** — Report bugs, request features
 - **Discussions** — Ask questions, share knowledge
@@ -344,24 +341,24 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 By working through IRONLOOP, you'll master:
 
-✅ **Embedded Systems:**  Real-time signal generation, sensor interfacing, hardware protocols (I2C, SPI, K-Line)
+**Embedded Systems:** Real-time signal generation, sensor interfacing, hardware protocols (I2C, SPI, K-Line)
 
-✅ **Automotive Engineering:** ECU architecture, fuel/ignition mapping, sensor signal types, ME7 internals
+**Automotive Engineering:** ECU architecture, fuel/ignition mapping, sensor signal types, ME7 internals
 
-✅ **Control Systems:** Feedback loops, PID tuning, signal processing, system stability
+**Control Systems:** Feedback loops, PID tuning, signal processing, system stability
 
-✅ **Machine Learning:** Reinforcement learning, policy optimization, RL environment design
+**Machine Learning:** Reinforcement learning, policy optimization, RL environment design
 
-✅ **Systems Integration:** Multi-process Python applications, inter-chip communication, real-time constraints
+**Systems Integration:** Multi-process Python applications, inter-chip communication, real-time constraints
 
-✅ **Open-Source Development:** Git workflows, documentation, collaborative engineering
+**Open-Source Development:** Git workflows, documentation, collaborative engineering
 
 ---
 
-**Made with 🔧 and ❤️ by the IRONLOOP Community**
+**Made by the IRONLOOP Community**
 
 *Last Updated: March 5, 2026*
