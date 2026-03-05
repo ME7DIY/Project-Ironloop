@@ -1,0 +1,61 @@
+{
+  "tps": {
+    "v_min": 0.5,
+    "v_max": 4.5
+  },
+  "map": {
+    "kpa_min": 20.0,
+    "kpa_max": 250.0,
+    "v_min": 0.5,
+    "v_max": 4.5
+  },
+  "lambda": {
+    "stoich_afr": 14.7,
+    "min": 0.7,
+    "max": 1.4
+  },
+  "o2_narrowband": {
+    "model": "sigmoid",
+    "rich_voltage": 0.85,
+    "lean_voltage": 0.15,
+    "switch_lambda": 1.0,
+    "sigmoid_gain": 45.0
+  },
+  "sensor_temp_limits": {
+    "ect_c_min": -40.0,
+    "ect_c_max": 115.0,
+    "iat_c_min": -40.0,
+    "iat_c_max": 80.0
+  },
+  "ect_remap": {
+    "enabled": true,
+    "in_min_c": 200.0,
+    "in_max_c": 2400.0,
+    "out_min_c": 75.0,
+    "out_max_c": 110.0
+  },
+  "iat_remap": {
+    "enabled": true,
+    "in_min_c": 20.0,
+    "in_max_c": 160.0,
+    "out_min_c": 20.0,
+    "out_max_c": 60.0
+  },
+  "hardware": {
+    "mock_on_missing": true,
+    "force_mock": false,
+    "mcp4728": {
+      "i2c_bus": 1,
+      "address": 96
+    },
+    "mcp4131": {
+      "spi_bus": 0,
+      "spi_device": 0,
+      "max_speed_hz": 1000000
+    }
+  },
+  "smoothing": {
+    "enabled": true,
+    "alpha": 0.35
+  }
+}

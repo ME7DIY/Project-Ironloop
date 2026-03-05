@@ -1,246 +1,178 @@
-# Engine-Sim Build Guide
+# Engine-Sim Build Guide (Windows, Known-Good)
 
-## Status: Dependencies Not Yet Installed
+This guide matches the setup that successfully built this repo on March 5, 2026.
 
-This document walks through building engine-sim on Windows with all necessary dependencies.
+## Confirmed Working Stack
 
----
+- Visual Studio Community 2026 (`Dev18`) with C++ toolchain
+- CMake `3.28.x`
+- `vcpkg` at `C:\vcpkg`
+- NMake generator (not Visual Studio generator)
 
-## System Requirements
+Note: CMake 3.28 does not expose a VS 2026 generator, so this project is built through `VsDevCmd.bat` + `NMake Makefiles`.
 
-- **OS:** Windows 10 or 11
-- **Compiler:** Visual Studio 2019+ or MinGW (MSVC recommended)
-- **RAM:** 8GB+ recommended
-- **Disk:** ~10GB for source + build artifacts
-
----
-
-## Step 1: Install CMake
-
-CMake is the build system used by engine-sim.
-
-1. Download CMake from: https://cmake.org/download/
-2. Choose the latest stable version (e.g., cmake-3.28.x-windows-x86_64.msi)
-3. Run the installer
-4. **Important:** During installation, check "Add CMake to the system PATH"
-5. Verify installation:
-   ```powershell
-   cmake --version
-   ```
-   Should output: `cmake version X.XX.X`
-
----
-
-## Step 2: Install Visual Studio Build Tools (or Full VS)
-
-You need a C++ compiler. Choose one:
-
-### Option A: Visual Studio Community (Free, ~4GB)
-1. Download from: https://visualstudio.microsoft.com/downloads/
-2. Select "Community" edition
-3. During installation, check **"Desktop development with C++"**
-4. This includes MSVC compiler, CMake tools, and NuGet
-5. Installation takes 20-30 minutes
-
-### Option B: Visual Studio Build Tools Only (~1GB)
-1. Go to: https://visualstudio.microsoft.com/downloads/
-2. Scroll down to "All Downloads"
-3. Find "Tools for Visual Studio"
-4. Download "Build Tools for Visual Studio 202X"
-5. Check **"Desktop development with C++"**
-
----
-
-## Step 3: Install Boost Library
-
-Boost is a large C++ library. Building from source takes time (~30-60 minutes).
-
-### Option A: Pre-built Boost (Easiest)
-1. Download pre-built binaries from: https://sourceforge.net/projects/boost/files/boost-binaries/
-2. Look for the latest version: `boost_1_XX_0-msvc...exe`
-3. Run installer, choose installation path (e.g., `C:\boost`)
-4. Note the install path - you'll need it for CMake
-
-### Option B: Build Boost from Source
-1. Download from: https://www.boost.org/users/download/
-2. Extract to `C:\boost_source`
-3. Open Command Prompt or PowerShell as Administrator:
-   ```powershell
-   cd C:\boost_source
-   .\bootstrap.bat
-   .\b2 --with-system --with-filesystem --with-thread thread-model=multi
-   ```
-4. Wait 30-60 minutes (Boost is large!)
-
----
-
-## Step 4: Install SDL2
-
-SDL2 is the graphics/window library used by engine-sim.
-
-### Option A: Pre-built Development Library (Recommended)
-1. Download from: https://github.com/libsdl-org/SDL/releases
-2. Look for `SDL2-devel-X.X.X-VC.zip` (VC = Visual C++)
-3. Extract to a permanent location (e.g., `C:\SDL2`)
-4. Note the path for CMake configuration
-
-### Optional: SDL2_image
-1. Download from: https://github.com/libsdl-org/SDL_image/releases
-2. Look for `SDL2_image-devel-X.X.X-VC.zip`
-3. Extract to `C:\SDL2_image` (or same location as SDL2)
-
----
-
-## Step 5: Install Flex and Bison
-
-These are lexer/parser generators used by engine-sim's scripting system.
-
-### Option A: WinFlexBison (One-Click Solution)
-1. Download from: https://github.com/lexxmark/winflexbison/releases
-2. Download `win_flex_bison-X.X.X.zip`
-3. Extract to `C:\FlexBison` (or similar)
-4. Add to PATH (see "Add to PATH" section below)
-
-### Option B: Cygwin or MinGW (More Complex)
-- Cygwin: https://cygwin.com/ (includes flex and bison)
-- Download installer, search for "flex" and "bison" in setup
-
----
-
-## Add Dependencies to PATH
-
-For CMake to find these libraries, they need to be in your system PATH.
-
-### Method 1: Environment Variables GUI
-1. Press `Win + X` → "System"
-2. Click "Advanced system settings"
-3. Click "Environment Variables"
-4. Under "User variables", click "New"
-5. Create these:
-
-| Variable Name | Value |
-|---------------|-------|
-| `BOOST_ROOT` | `C:\boost` (or your boost path) |
-| `SDL2_PATH` | `C:\SDL2` (or your SDL2 path) |
-| `SDL2_IMAGE_PATH` | `C:\SDL2_image` (optional) |
-
-6. Also add to "Path" variable:
-   - `C:\FlexBison` (or wherever you extracted WinFlexBison)
-   - `C:\cmake\bin` (usually auto-added by CMake installer)
-
-### Method 2: Command Line
-```powershell
-$env:BOOST_ROOT = "C:\boost"
-$env:SDL2_PATH = "C:\SDL2"
-$env:Path = "$env:Path;C:\FlexBison"
-```
-
----
-
-## Build Engine-Sim
-
-Once all dependencies are installed and added to PATH:
+## One-Time Dependency Install
 
 ```powershell
-cd C:\Users\kitza\Documents\Project-Ironloop\Source\Phase-01-EngineSimPatch\engine-sim
+git clone https://github.com/microsoft/vcpkg C:\vcpkg
+C:\vcpkg\bootstrap-vcpkg.bat
 
-# Create build directory
-mkdir build
-cd build
-
-# Run CMake
-cmake .. -G "Visual Studio 17 2022"
-
-# Build (Release mode is faster)
-cmake --build . --config Release
+C:\vcpkg\vcpkg install sdl2:x64-windows sdl2-image:x64-windows
+C:\vcpkg\vcpkg install boost-filesystem:x64-windows-static-md
 ```
 
-This generates a Visual Studio solution in the `build` folder. You can also open it with VS GUI:
+Install winflexbison (used by `piranha`):
+
 ```powershell
-start .\engine-sim.sln
+$toolsDir="C:\Users\kitza\Documents\Project-Ironloop\.tools\winflexbison"
+New-Item -ItemType Directory -Path $toolsDir -Force | Out-Null
+$zip="$env:TEMP\win_flex_bison-2.5.25.zip"
+Invoke-WebRequest -Uri "https://github.com/lexxmark/winflexbison/releases/download/v2.5.25/win_flex_bison-2.5.25.zip" -OutFile $zip
+Expand-Archive -LiteralPath $zip -DestinationPath $toolsDir -Force
 ```
 
----
+## Source Compatibility Fixes Required
 
-## Expected Build Time
+These fixes are needed for modern dependencies and are already applied in this working tree:
 
-| Step | Time |
-|------|------|
-| Boost (if building) | 30-60 min |
-| CMake configuration | 2-5 min |
-| First build | 20-40 min |
-| Incremental builds | 1-5 min |
+1. [`src/piston_engine_simulator.cpp`](C:\Users\kitza\Documents\Project-Ironloop\Source\Phase-01-EngineSimPatch\engine-sim\src\piston_engine_simulator.cpp): remove stale `m_antialiasingFilters` assert.
+2. [`dependencies/submodules/piranha/src/path.cpp`](C:\Users\kitza\Documents\Project-Ironloop\Source\Phase-01-EngineSimPatch\engine-sim\dependencies\submodules\piranha\src\path.cpp): replace `is_complete()` with `is_absolute()`.
 
-**Total first build:** ~1-2 hours (mostly waiting)
+## Configure
 
----
+From `Source\Phase-01-EngineSimPatch\engine-sim`:
 
-## Troubleshooting
-
-### CMake can't find Boost
-```
--- Could NOT find Boost
-```
-
-Solution:
 ```powershell
-$env:BOOST_ROOT = "C:\your\boost\path"
-cd build
-rm -r CMakeFiles CMakeCache.txt
-cmake .. -G "Visual Studio 17 2022"
+$cmd='"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul && "C:\Program Files\CMake\bin\cmake.exe" -S . -B build-vs18-md -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static-md -DSDL2_DIR=C:/vcpkg/installed/x64-windows -DBOOST_ROOT=C:/vcpkg/installed/x64-windows-static-md -DBoost_INCLUDE_DIR=C:/vcpkg/installed/x64-windows-static-md/include -DBoost_FILESYSTEM_LIBRARY_RELEASE=C:/vcpkg/installed/x64-windows-static-md/lib/boost_filesystem-vc145-mt-x64-1_90.lib -DBoost_FILESYSTEM_LIBRARY_DEBUG=C:/vcpkg/installed/x64-windows-static-md/debug/lib/boost_filesystem-vc145-mt-gd-x64-1_90.lib -DFLEX_EXECUTABLE=C:/Users/kitza/Documents/Project-Ironloop/.tools/winflexbison/win_flex.exe -DBISON_EXECUTABLE=C:/Users/kitza/Documents/Project-Ironloop/.tools/winflexbison/win_bison.exe'
+cmd /c $cmd
 ```
 
-### CMake can't find SDL2
+## Build
+
+```powershell
+$cmd='"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul && "C:\Program Files\CMake\bin\cmake.exe" --build build-vs18-md'
+cmd /c $cmd
 ```
-Could not find SDL2
+
+## Run
+
+Set SDL runtime DLL path, then launch:
+
+```powershell
+$env:PATH="C:\vcpkg\installed\x64-windows\bin;$env:PATH"
+.\build-vs18-md\engine-sim-app.exe
 ```
 
-Solution: Same as above, set `SDL2_PATH` environment variable.
+Optional UDP runtime config (for Phase 01 state stream):
 
-### "flex" or "bison" not found
-Add `C:\FlexBison` to your PATH and restart PowerShell.
+```powershell
+$env:ENGINE_SIM_UDP_ENABLED="1"
+$env:ENGINE_SIM_UDP_HOST="127.0.0.1"
+$env:ENGINE_SIM_UDP_PORT="5555"
+```
 
-### "MSVC not found"
-You need to install Visual Studio Build Tools. CMake can't find the compiler if it's not installed.
+If you still get missing DLL errors:
+
+```powershell
+Copy-Item C:\vcpkg\installed\x64-windows\bin\*.dll .\build-vs18-md\ -Force
+.\build-vs18-md\engine-sim-app.exe
+```
+
+## Output Paths
+
+- App: [`build-vs18-md/engine-sim-app.exe`](C:\Users\kitza\Documents\Project-Ironloop\Source\Phase-01-EngineSimPatch\engine-sim\build-vs18-md\engine-sim-app.exe)
+- Tests: `build-vs18-md/engine-sim-test.exe`
+
+## Phase 01 Receiver / Bridge Scripts
+
+From `Source\Phase-01-EngineSimPatch`:
+
+```powershell
+python .\python-bridge\socket_receiver.py
+python .\python-bridge\signal_generator.py --sink stub
+python .\python-bridge\signal_generator.py --sink csv --csv-path .\logs\signal_targets.csv
+python .\python-bridge\udp_test_sender.py --duration 10 --hz 60
+```
+
+Receiver schema options:
+
+- `--expected-schema-version 1`
+- `--no-schema-check` (debug only)
+
+`signal_generator.py` options:
+
+- `--sink stub|console|csv|pi`
+- `--config .\python-bridge\bridge_config.json`
+- `--print-input` (debug)
+
+Temperature mapping notes:
+
+- `combustion_temp_c` is remapped into ECU-like ECT range via `ect_remap` in `bridge_config.json`.
+- `intake_temp_c` is remapped via `iat_remap` to avoid sitting on clamp limits.
+- Hard clamps for ECT/IAT are controlled by `sensor_temp_limits`.
+- If resistance pins near NTC min (e.g., `100ohm`), lower `ect_remap.out_max_c` or tighten `sensor_temp_limits.ect_c_max`.
+
+Narrowband O2 model notes:
+
+- `o2_narrowband.model` supports `step` or `sigmoid`.
+- Recommended default is `sigmoid` for smoother transitions around stoich:
+  - `switch_lambda` (usually `1.0`)
+  - `sigmoid_gain` (higher = sharper switching)
+
+Pi hardware sink (safe pre-hardware mode):
+
+```powershell
+python .\python-bridge\signal_generator.py --sink pi
+```
+
+If Pi dependencies/devices are missing, it automatically falls back to mock mode
+when `hardware.mock_on_missing=true` in `bridge_config.json`.
+
+## Smoke Test Flow (No Hardware Needed)
+
+Use two terminals from `Source\Phase-01-EngineSimPatch`:
+
+1. Consumer (`signal_generator`):
+```powershell
+python .\python-bridge\signal_generator.py --sink stub
+```
+2. Producer (`udp_test_sender`):
+```powershell
+python .\python-bridge\udp_test_sender.py --duration 15 --hz 60
+```
+
+Expected result:
+- `signal_generator.py` continuously prints target outputs (`dac[tps]`, `dac[map]`, `dac[o2]`, `r_ect`, `r_iat`, `rpm`).
+
+Observer mode (alternative to signal generator):
+
+1. `python .\python-bridge\socket_receiver.py`
+2. `python .\python-bridge\udp_test_sender.py --duration 15 --hz 60`
+
+Note: `socket_receiver.py` and `signal_generator.py` both bind UDP `127.0.0.1:5555`, so run one or the other unless you add a relay/fan-out process.
+
+## Common Failures
+
+### `Could NOT find SDL2`
+
+Use `sdl2:x64-windows` and set `-DSDL2_DIR=C:/vcpkg/installed/x64-windows`.
+
+### Boost runtime mismatch (`MT` vs `MD`)
+
+Use `boost-filesystem:x64-windows-static-md` and point CMake at `x64-windows-static-md` libs.
+
+### FLEX/BISON not found
+
+Point CMake explicitly:
+
+- `-DFLEX_EXECUTABLE=.../win_flex.exe`
+- `-DBISON_EXECUTABLE=.../win_bison.exe`
+
+### VS generator not found
+
+Do not use `-G "Visual Studio 17 2022"` on this stack. Use `-G "NMake Makefiles"` through `VsDevCmd.bat`.
 
 ---
 
-## After Successful Build
-
-Once the build completes:
-
-1. **Executable location:** `engine-sim\build\bin\engine-sim-app.exe`
-2. **Run with:** `.\build\bin\engine-sim-app.exe` from engine-sim directory
-3. This should launch the engine simulator GUI
-
-If DLL errors occur, copy required DLLs from dependency folders to the `bin/` directory.
-
----
-
-## Next: Adding Socket Broadcast
-
-Once engine-sim builds and runs successfully:
-
-1. Identify the main simulation loop in `src/`
-2. Add JSON serialization library (nlohmann/json)
-3. Add socket broadcast code
-4. Emit engine state every frame
-
-See `Source/Phase-01-EngineSimPatch/README.md` for implementation steps.
-
----
-
-## Resources
-
-- CMake: https://cmake.org/cmake/help/latest/
-- Boost: https://www.boost.org/doc/
-- SDL2: https://wiki.libsdl.org/SDL2/
-- WinFlexBison: https://github.com/lexxmark/winflexbison
-- engine-sim source: https://github.com/ange-yaghi/engine-sim
-
-**Note:** This is experimental and setup is complex. Don't hesitate to reach out if you hit issues!
-
----
-
-**Last Updated:** March 5, 2026  
-**Status:** Build environment setup guide created, actual build pending dependency installation
+Last Updated: March 5, 2026  
+Status: Verified working on this machine
