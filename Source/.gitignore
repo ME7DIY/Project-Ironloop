@@ -1,0 +1,84 @@
+# Source Directory .gitignore
+# This prevents large build artifacts and compiled binaries from being tracked
+
+# ============================================================================
+# Engine-Sim Specific (DO NOT COMMIT BUILD ARTIFACTS)
+# ============================================================================
+
+Source/Phase-01-EngineSimPatch/engine-sim/build/
+Source/Phase-01-EngineSimPatch/engine-sim/cmake_install.cmake
+Source/Phase-01-EngineSimPatch/engine-sim/CMakeCache.txt
+Source/Phase-01-EngineSimPatch/engine-sim/CMakeFiles/
+Source/Phase-01-EngineSimPatch/engine-sim/*.exe
+Source/Phase-01-EngineSimPatch/engine-sim/*.dll
+
+# Visual Studio / MSVC build outputs
+Source/Phase-01-EngineSimPatch/engine-sim/Debug/
+Source/Phase-01-EngineSimPatch/engine-sim/Release/
+Source/Phase-01-EngineSimPatch/engine-sim/x64/
+Source/Phase-01-EngineSimPatch/engine-sim/*.vcxproj.user
+Source/Phase-01-EngineSimPatch/engine-sim/*.sln
+
+# GCC/Linux build outputs
+Source/Phase-01-EngineSimPatch/engine-sim/*.o
+Source/Phase-01-EngineSimPatch/engine-sim/*.a
+Source/Phase-01-EngineSimPatch/engine-sim/*.so
+
+# ============================================================================
+# Python Artifacts (Phases 2-5)
+# ============================================================================
+
+# Python bytecode
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+**/venv/
+**/env/
+**/ENV/
+
+# Python cache
+.pytest_cache/
+.coverage
+
+# ============================================================================
+# IDE / Editor Files
+# ============================================================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ============================================================================
+# OS-Specific
+# ============================================================================
+
+.DS_Store
+Thumbs.db
+
+# ============================================================================
+# Hardware / Testing Artifacts (DO NOT COMMIT UNLESS APPROVED)
+# ============================================================================
+
+# Logic analyzer captures
+*.vcd
+*.fst
+
+# ECU dumps / binary files
+*.bin
+*.hex
+
+# Oscilloscope captures
+*.csv
+*.dat
+
+# Temporary test data
+**/test_output/
+**/test_data/
