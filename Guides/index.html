@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRONLOOP Research Index</title>
+<title>IRONLOOP Guides Index</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -94,6 +94,7 @@
   }
 
   .nav-links a:hover { color: var(--accent); }
+  .nav-links .active { color: var(--accent); }
 
   .hero {
     padding: 5rem 0 2rem;
@@ -174,40 +175,34 @@
 
 <nav class="nav">
   <div class="nav-row">
-    <div class="nav-logo">// IRONLOOP RESEARCH</div>
+    <div class="nav-logo">// IRONLOOP GUIDES</div>
     <ul class="nav-links">
-      <li><a href="../index.html">Main Project</a></li>
-      <li><a href="index.html">Research Index</a></li>
-      <li><a href="../roadmap/index.html">Roadmap</a></li>
-      <li><a href="../guides/index.html">Guides</a></li>
+      <li><a href="../ME7-HIL-Project.html">Main Project</a></li>
+      <li><a href="../Research/index.html">Research</a></li>
+      <li><a href="../Roadmap/index.html">Roadmap</a></li>
+      <li><a class="active" href="./index.html">Guides</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="wrapper">
   <section class="hero">
-    <div class="eyebrow">Phase Logs + Technical Notes</div>
-    <h1 class="title">Research Documents</h1>
-    <p class="subtitle">This section tracks what we learn while building Project IRONLOOP. Each entry is an implementation-focused document intended to support actual phase execution.</p>
+    <div class="eyebrow">Hands-On Build Guides</div>
+    <h1 class="title">Practical Guides</h1>
+    <p class="subtitle">Private-style step-by-step guides for ordering, setup, and early bench bring-up tasks. These focus on execution details rather than project theory.</p>
   </section>
 
   <section class="cards">
-    <a class="card" href="phase-01-state-output-research.html">
-      <div class="card-phase">Phase 01</div>
-      <h3>Engine State Socket Output</h3>
-      <p>Why socket output is required, what data we need, where to hook in engine-sim, and a practical implementation sequence for kicking off Phase 1.</p>
+    <a class="card" href="me7-bench-order-guide.html">
+      <div class="card-phase">Buying Guide</div>
+      <h3>ME7 Bench Order Guide</h3>
+      <p>Detailed procurement list with order priority, budget ranges, and sourcing links for safe bench bring-up hardware.</p>
     </a>
 
-    <a class="card" href="phase-03-crankcam-rig-options.html">
-      <div class="card-phase">Phase 03</div>
-      <h3>Crank/Cam Rig Options</h3>
-      <p>Community-sourced hardware strategy notes: ArduStim path, 16-channel logic capture, stim baseboard architecture, and VR simulation investigation plan.</p>
-    </a>
-
-    <a class="card" href="../roadmap/index.html">
-      <div class="card-phase">Execution</div>
-      <h3>Project Roadmap</h3>
-      <p>Live phase tracker with current completion status, including detailed Phase 1 checkpoint progress and remaining hardware validation.</p>
+    <a class="card" href="ardu-stim-early-test-guide.html">
+      <div class="card-phase">Early Testing</div>
+      <h3>Ardu-Stim Setup Guide</h3>
+      <p>What Ardu-Stim can validate, what to buy, firmware setup flow, and how it fits as an early trigger-signal test step.</p>
     </a>
   </section>
 </div>

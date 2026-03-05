@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRONLOOP - ME7 Bench Bring-Up Buying Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --accent2: #f0920a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --red: #f04a4a;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.55) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 3.25rem 0 1.6rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.95rem;
+  }
+  .title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.2rem, 7.5vw, 4.6rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .title span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+  .sub {
+    margin-top: 1rem;
+    max-width: 860px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .callout {
+    margin-top: 1.2rem;
+    border: 1px solid rgba(240,146,10,0.35);
+    background: rgba(240,146,10,0.08);
+    padding: 0.75rem 0.9rem;
+    color: #dfbf89;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  .sec {
+    margin-top: 1.25rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(165deg, var(--surface), var(--surface2));
+  }
+  .sec-hd {
+    border-bottom: 1px solid var(--border);
+    padding: 0.78rem 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .sec-title {
+    font-family: var(--display);
+    font-size: 1.24rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .sec-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    border: 1px solid rgba(74,85,104,0.65);
+    color: var(--text-dim);
+    padding: 0.22rem 0.5rem;
+    white-space: nowrap;
+  }
+  .sec-bd {
+    padding: 0.82rem 0.95rem 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding: 0.52rem 0.45rem;
+  }
+  td {
+    vertical-align: top;
+    border-bottom: 1px solid rgba(30,37,48,0.55);
+    padding: 0.58rem 0.45rem;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid;
+    padding: 0.18rem 0.4rem;
+  }
+  .must { color: var(--green); border-color: rgba(12,240,122,0.35); background: rgba(12,240,122,0.08); }
+  .next { color: var(--accent2); border-color: rgba(240,146,10,0.35); background: rgba(240,146,10,0.08); }
+  .later { color: var(--blue); border-color: rgba(10,180,240,0.35); background: rgba(10,180,240,0.08); }
+
+  .money {
+    font-family: var(--mono);
+    color: var(--green);
+    white-space: nowrap;
+    font-size: 0.78rem;
+  }
+  .mono {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--text-dim);
+  }
+  a {
+    color: #8abde6;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(138,189,230,0.45);
+  }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.15rem;
+  }
+  .box {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.8rem 0.9rem;
+  }
+  .box h3 {
+    font-family: var(--display);
+    font-size: 1.02rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .box ul { list-style: none; }
+  .box li {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    padding: 0.22rem 0;
+    border-bottom: 1px solid rgba(30,37,48,0.5);
+  }
+  .box li:last-child { border-bottom: none; }
+  .box li::before { content: '> '; color: var(--accent); }
+
+  .footer {
+    margin-top: 1.35rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 920px) {
+    .split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Private Build Document</div>
+      <h1 class="title">ME7 Bench Bring-Up <span>Buying Guide</span></h1>
+      <p class="sub">
+        This is the detailed order plan for starting IRONLOOP hardware bring-up without guessing.
+        It is split into: buy now (to start safely), buy next (for first ECU signal work), and buy later (for deeper loop work).
+        Links are included so you can source everything quickly.
+      </p>
+      <div class="callout">
+        IMPORTANT: Connector pinout parts are ECU-variant specific. Before final connector order, confirm your Bosch and VAG part numbers.
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Batch A - Order Now (Safe Power + Core Compute)</div>
+        <div class="sec-tag">Start Here</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Need</th>
+              <th>Qty</th>
+              <th>What to Buy</th>
+              <th>Where to Source</th>
+              <th>Budget</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bench DC Supply</td>
+              <td class="mono">1</td>
+              <td>Programmable bench PSU, 0-30V / >=5A with current limiting.</td>
+              <td>
+                <a href="https://siglentna.com/product/spd1305x/" target="_blank" rel="noopener noreferrer">Siglent SPD1305X</a><br>
+                <a href="https://siglentna.com/power-supplies/spd1000x-series-programmable-dc-power-supply/" target="_blank" rel="noopener noreferrer">SPD1000X series overview</a>
+              </td>
+              <td class="money">$300-350</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Main Fuse Block</td>
+              <td class="mono">1</td>
+              <td>12-circuit ATO/ATC fuse block with cover + negative bus.</td>
+              <td>
+                <a href="https://www.bluesea.com/products/5026/" target="_blank" rel="noopener noreferrer">Blue Sea 5026</a>
+              </td>
+              <td class="money">$50-70</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Inline Fuse Holders</td>
+              <td class="mono">4-6</td>
+              <td>Waterproof ATO inline holders (12 AWG preferred for main feeds).</td>
+              <td>
+                <a href="https://www.digikey.com/en/product-highlight/l/littelfuse/fhas100-ato-and-mini-fuse-holders-series" target="_blank" rel="noopener noreferrer">Littelfuse FHAS100</a>
+              </td>
+              <td class="money">$40-80 total</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>ATO/ATC Fuses</td>
+              <td class="mono">1 kit</td>
+              <td>Blade fuses 1A-30A assortment + spares.</td>
+              <td>
+                <a href="https://www.digikey.com/htmldatasheets/production/667198/0/0/1/fks-ato-32v-blade-fuse.html" target="_blank" rel="noopener noreferrer">Littelfuse ATO series reference</a>
+              </td>
+              <td class="money">$15-35</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Raspberry Pi 5</td>
+              <td class="mono">1</td>
+              <td>Pi 5 (4GB or 8GB), plus official 27W USB-C PSU and active cooling.</td>
+              <td>
+                <a href="https://www.raspberrypi.com/products/raspberry-pi-5/" target="_blank" rel="noopener noreferrer">Raspberry Pi 5</a><br>
+                <a href="https://www.raspberrypi.com/news/introducing-raspberry-pi-5/" target="_blank" rel="noopener noreferrer">27W PSU notes</a><br>
+                <a href="https://www.raspberrypi.com/products/active-cooler/" target="_blank" rel="noopener noreferrer">Active Cooler</a>
+              </td>
+              <td class="money">$90-150</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>microSD</td>
+              <td class="mono">1</td>
+              <td>64GB+ A2 rated card for Pi OS / scripts / logs.</td>
+              <td>
+                <a href="https://www.raspberrypi.com/products/sd-cards/" target="_blank" rel="noopener noreferrer">Official Pi SD cards</a>
+              </td>
+              <td class="money">$10-30</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Raspberry Pi Pico (Crank/Cam MCU)</td>
+              <td class="mono">1-2</td>
+              <td>Pico 1/2 board for deterministic crank/cam generation.</td>
+              <td>
+                <a href="https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html" target="_blank" rel="noopener noreferrer">Pico series docs</a>
+              </td>
+              <td class="money">$5-20 each</td>
+              <td><span class="status next">Next</span></td>
+            </tr>
+            <tr>
+              <td>Wiring Consumables</td>
+              <td class="mono">1 lot</td>
+              <td>Automotive wire: 12 AWG, 16 AWG, 20-22 AWG; heat-shrink; ferrules; ring terminals.</td>
+              <td>
+                <a href="https://www.corsa-technic.com/" target="_blank" rel="noopener noreferrer">Corsa Technic</a><br>
+                Digi-Key / Mouser / local auto-electric suppliers
+              </td>
+              <td class="money">$80-180</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Multimeter</td>
+              <td class="mono">1</td>
+              <td>Decent DMM with continuity, DC volts, resistance (auto-ranging preferred).</td>
+              <td>Any trusted electronics retailer</td>
+              <td class="money">$50-150</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Batch B - Order Next (Signal Generation + Logging)</div>
+        <div class="sec-tag">Phase 1/2 Hardware</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Need</th>
+              <th>Qty</th>
+              <th>What to Buy</th>
+              <th>Where to Source</th>
+              <th>Budget</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Quad DAC Board</td>
+              <td class="mono">1-2</td>
+              <td>MCP4728 breakout for TPS/MAP/O2/aux analog outputs.</td>
+              <td>
+                <a href="https://www.adafruit.com/product/4470" target="_blank" rel="noopener noreferrer">Adafruit MCP4728 (PID 4470)</a><br>
+                <a href="https://learn.adafruit.com/adafruit-mcp4728-i2c-quad-dac" target="_blank" rel="noopener noreferrer">MCP4728 guide</a>
+              </td>
+              <td class="money">$10-20 each</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Digital Pot (NTC emulation)</td>
+              <td class="mono">5-10</td>
+              <td>MCP4131 10k SPI digital potentiometer (get extras).</td>
+              <td>
+                <a href="https://www.microchip.com/en-us/product/MCP4131" target="_blank" rel="noopener noreferrer">Microchip MCP4131</a><br>
+                <a href="https://www.digikey.com/en/products/detail/microchip-technology/MCP4131-103E-P/1874338" target="_blank" rel="noopener noreferrer">Digi-Key MCP4131-103E/P</a>
+              </td>
+              <td class="money">$2-4 each</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>5V Regulator (optional if powering Pi from bench 12V)</td>
+              <td class="mono">1</td>
+              <td>Automotive-safe buck converter to feed Pi from 12V rail.</td>
+              <td>
+                <a href="https://www.pololu.com/product/2851" target="_blank" rel="noopener noreferrer">Pololu D24V50F5 (5V/5A)</a>
+              </td>
+              <td class="money">$30-40</td>
+              <td><span class="status next">Next</span></td>
+            </tr>
+            <tr>
+              <td>OBD/Diagnostic Interface</td>
+              <td class="mono">1</td>
+              <td>Reliable VAG diagnostics interface for ME7 fault/live data checks.</td>
+              <td>
+                <a href="https://www.ross-tech.com/vcds/hex-v2.php" target="_blank" rel="noopener noreferrer">Ross-Tech HEX-V2 details</a><br>
+                <a href="https://store.ross-tech.com/shop/vchv2_ent/" target="_blank" rel="noopener noreferrer">HEX-V2 Enthusiast store</a>
+              </td>
+              <td class="money">$199-299</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Logic Analyzer</td>
+              <td class="mono">1</td>
+              <td>8+ channels minimum for crank/cam and digital edge timing.</td>
+              <td>
+                <a href="https://store.saleae.com/products/logic-8" target="_blank" rel="noopener noreferrer">Saleae Logic 8</a><br>
+                <a href="https://blog.saleae.com/saleae-discounts" target="_blank" rel="noopener noreferrer">Saleae discounts</a>
+              </td>
+              <td class="money">$250-500</td>
+              <td><span class="status next">Next</span></td>
+            </tr>
+            <tr>
+              <td>Optional USB Scope/LA (budget)</td>
+              <td class="mono">1</td>
+              <td>Budget validation tool if Saleae is deferred.</td>
+              <td>
+                <a href="https://www.hantek.in/products/detail/153.html" target="_blank" rel="noopener noreferrer">Hantek 6022BL specs</a><br>
+                <a href="https://sigrok.org/wiki/Hantek_6022BL" target="_blank" rel="noopener noreferrer">sigrok support notes</a>
+              </td>
+              <td class="money">$90-140</td>
+              <td><span class="status later">Later</span></td>
+            </tr>
+            <tr>
+              <td>OBD Breakout Bench Tool (optional shortcut)</td>
+              <td class="mono">1</td>
+              <td>Prebuilt bench ECU power/OBD breakout unit to speed bring-up.</td>
+              <td>
+                <a href="https://autel.tools/collections/cables-and-harnesses/products/godiag-gt100-obd2-breakout-box-and-ecu-bench-tool" target="_blank" rel="noopener noreferrer">GODIAG GT100+</a><br>
+                <a href="https://ecuhero.com/product/universal-ecu-bench-harness-and-power-supply/" target="_blank" rel="noopener noreferrer">ECU Hero bench harness</a>
+              </td>
+              <td class="money">$130-180</td>
+              <td><span class="status next">Next</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">ME7-Specific Harness Items (Do Not Blind-Buy Yet)</div>
+        <div class="sec-tag">Needs ECU Part Number</div>
+      </div>
+      <div class="sec-bd">
+        <p style="color:var(--text-dim); font-size:0.9rem; margin-bottom:0.7rem;">
+          These are mandatory, but must match your exact ECU housing and pin family. Once you share your Bosch and VAG ECU numbers,
+          we can convert this into exact connector part numbers and terminal counts.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Need</th>
+              <th>Qty</th>
+              <th>Spec</th>
+              <th>Where to Source</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ECU Connector Housings + locks</td>
+              <td class="mono">1 set</td>
+              <td>Correct mating shells for your ME7 variant.</td>
+              <td>Corsa Technic / OEM harness salvage / connector specialists</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Crimp Terminals + seals</td>
+              <td class="mono">50-150</td>
+              <td>Automotive signal terminals sized for your wire gauges.</td>
+              <td>
+                <a href="https://www.digikey.com/en/product-highlight/t/te-connectivity-amp/automotive-grade-mini-signal-connector-system" target="_blank" rel="noopener noreferrer">TE mini signal families</a>
+              </td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+            <tr>
+              <td>Bench ECU harness body</td>
+              <td class="mono">1</td>
+              <td>Pigtail or full breakout harness for ECU bench test.</td>
+              <td>Prebuilt bench-harness vendors or DIY from donor harness</td>
+              <td><span class="status must">Must</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="split">
+      <div class="box">
+        <h3>Estimated Spend</h3>
+        <ul>
+          <li>Batch A (safe bring-up): roughly $600 - $1,000</li>
+          <li>Batch B (signal + logging): roughly $450 - $1,100</li>
+          <li>ME7 connector/harness parts: highly variable ($100 - $500)</li>
+          <li>Total practical range: about $1,150 - $2,600</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Order Sequence (Recommended)</h3>
+        <ul>
+          <li>1) Power safety parts + bench PSU</li>
+          <li>2) Pi 5 + storage + cooling</li>
+          <li>3) DAC + digital pot + wire consumables</li>
+          <li>4) Diagnostics and logging tools</li>
+          <li>5) Only then buy exact ECU connector parts (after ECU PN confirmation)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="box">
+        <h3>Source Map</h3>
+        <ul>
+          <li>Raspberry Pi compute/accessories: raspberrypi.com official reseller list</li>
+          <li>Analog/IC/fuse electronic parts: Digi-Key, Mouser</li>
+          <li>Breakout boards: Adafruit, SparkFun</li>
+          <li>Harness/connectors/wire: Corsa Technic and automotive wiring suppliers</li>
+          <li>Diagnostics: Ross-Tech official store</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>What Not To Buy Yet</h3>
+        <ul>
+          <li>Random ECU connector kits without matching your exact ME7 part number</li>
+          <li>High-cost crank/cam conditioning boards before basic power + analog validation</li>
+          <li>Exotic instrumentation unless you already know the exact measurement gap</li>
+          <li>Bulk quantities of terminals until final pin map is locked</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="footer">
+      Generated for private local use. Update this file after ECU part-number identification and first hardware arrival check.
+    </footer>
+  </div>
+</body>
+</html>
