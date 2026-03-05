@@ -262,7 +262,7 @@ Project-Ironloop/
 │   ├── schematics/
 │   ├── pcb-layouts/
 │   └── bom/
-└── Docs/                         # Detailed guides & tutorials (TBD)
+└── docs/                         # Detailed guides & tutorials (TBD)
     ├── phase-guides/
     ├── troubleshooting/
     └── signal-reference/

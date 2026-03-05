@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 01 Research - Engine State Socket Output</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --green: #0cf07a;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(10,11,13,0.92);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+  }
+
+  .nav-row {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2rem 1.3rem 4rem;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    margin-bottom: 0.65rem;
+  }
+
+  h1 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    line-height: 0.95;
+    font-size: clamp(1.8rem, 5.2vw, 3.6rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .meta {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .panel {
+    background: linear-gradient(160deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    padding: 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  h2 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 1.35rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.45rem;
+  }
+
+  h3 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 1.08rem;
+    margin: 0.7rem 0 0.3rem;
+  }
+
+  p { color: var(--text-dim); }
+
+  ul, ol {
+    margin-left: 1.2rem;
+    color: var(--text-dim);
+  }
+
+  code {
+    font-family: var(--mono);
+    color: var(--green);
+  }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="nav-logo">// PHASE 01 RESEARCH</div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Main Project</a></li>
+      <li><a href="index.html">Research Index</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="eyebrow">Project IRONLOOP</div>
+  <h1>Engine State Socket Output</h1>
+  <div class="meta">Phase 01 Research Log - March 5, 2026</div>
+
+  <section class="panel">
+    <h2>Why This Matters</h2>
+    <p>Phase 01 is blocking the rest of IRONLOOP. If engine-sim cannot publish state in real time, the Python bridge cannot generate sensor outputs for the ME7 bench. No state stream means no closed loop in later phases.</p>
+  </section>
+
+  <section class="panel">
+    <h2>What We Learned So Far</h2>
+    <h3>Build/Platform Reality</h3>
+    <ul>
+      <li>The fork now builds successfully in <code>build-vs18-md</code> with VS 2026 toolchain + NMake.</li>
+      <li>CMake 3.28 does not directly target VS 2026 generator, so <code>VsDevCmd.bat</code> workflow is required.</li>
+      <li>Runtime includes SDL2/SDL2_image and legacy DirectX components.</li>
+    </ul>
+
+    <h3>Compatibility Repairs Already Applied</h3>
+    <ul>
+      <li>Removed stale assert in piston simulator destructor.</li>
+      <li>Updated legacy Boost filesystem call in piranha path handling.</li>
+      <li>Removed forced debug D3DX link dependencies in delta-studio CMake.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Socket Output Purpose</h2>
+    <ol>
+      <li>Provide live engine telemetry to Python bridge.</li>
+      <li>Feed signal conversion layer (TPS, MAP, MAF, temps, lambda).</li>
+      <li>Support logging/validation and future closed-loop control.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>Minimum State Payload</h2>
+    <ul>
+      <li><code>timestamp_ms</code>, <code>frame_number</code></li>
+      <li><code>engine.rpm</code></li>
+      <li><code>engine.throttle_position</code></li>
+      <li><code>engine.manifold_pressure</code></li>
+      <li><code>engine.coolant_temp</code></li>
+      <li><code>engine.intake_air_temp</code></li>
+      <li><code>engine.lambda</code></li>
+    </ul>
+    <p>Follow-on values: injector pulse width, ignition advance, cam/crank angle, fuel flow.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Transport Decision</h2>
+    <p>Start with UDP on <code>127.0.0.1:5555</code> and JSON per simulation frame. It is simple, fast, and good enough for telemetry where occasional packet loss is acceptable.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Implementation Plan</h2>
+    <ol>
+      <li>Add a small state broadcaster module in engine-sim (Winsock2).</li>
+      <li>Hook one publish call into per-frame simulation flow after state update.</li>
+      <li>Serialize to stable JSON schema.</li>
+      <li>Add Python receiver in <code>python-bridge</code> to verify schema/rate.</li>
+      <li>Measure frame impact and fail safely if socket errors occur.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>Execution Goal for Next Session</h2>
+    <p>Implement MVP telemetry output with just RPM + throttle + timestamp, verify receiver on localhost, then expand payload field-by-field.</p>
+  </section>
+</main>
+
+</body>
+</html>
+

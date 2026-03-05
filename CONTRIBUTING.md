@@ -170,7 +170,7 @@ private:
 - Add summary comments if submitting PDFs
 
 ### For Tutorials
-- Place in `Docs/` directory
+- Place in `docs/` directory
 - Use clear step-by-step format
 - Include wiring diagrams and code examples
 - Test instructions on fresh setup
@@ -179,7 +179,7 @@ private:
 
 - `bug` — Something isn't working
 - `enhancement` — New feature or improvement
-- `documentation` — Docs, guides, README updates
+- `documentation` — docs, guides, README updates
 - `hardware` — Physical components, wiring, PCB design
 - `software` — Code, firmware, algorithms
 - `research` — Theory, datasheets, reference materials
