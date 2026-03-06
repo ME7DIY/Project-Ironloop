@@ -84,6 +84,27 @@
     list-style: none;
   }
 
+  .nav-toggle {
+    display: none;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.24rem;
+    padding: 0;
+  }
+
+  .nav-toggle span {
+    width: 1rem;
+    height: 1px;
+    background: var(--text-dim);
+    display: block;
+  }
+
   .nav-links a {
     font-family: var(--mono);
     color: var(--text-dim);
@@ -166,8 +187,19 @@
   }
 
   @media (max-width: 700px) {
-    .nav-links { display: none; }
     .wrapper, .nav-row { padding: 0 1rem; }
+    .nav-row { flex-wrap: wrap; }
+    .nav-toggle { display: inline-flex; margin-left: auto; }
+    .nav-links {
+      display: none;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .nav.menu-open .nav-links { display: flex; }
   }
 </style>
 </head>
@@ -176,7 +208,10 @@
 <nav class="nav">
   <div class="nav-row">
     <div class="nav-logo">// IRONLOOP GUIDES</div>
-    <ul class="nav-links">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="guides-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="guides-nav">
       <li><a href="../ME7-HIL-Project.html">Main Project</a></li>
       <li><a href="../Research/index.html">Research</a></li>
       <li><a href="../Roadmap/index.html">Roadmap</a></li>
@@ -206,6 +241,34 @@
     </a>
   </section>
 </div>
+
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+
+  const closeMenu = () => {
+    nav.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  nav.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 700px)').matches) closeMenu();
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 700) closeMenu();
+  });
+})();
+</script>
 
 </body>
 </html>

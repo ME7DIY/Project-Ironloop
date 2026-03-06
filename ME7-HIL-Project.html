@@ -692,6 +692,27 @@
     list-style: none;
   }
 
+  .nav-toggle {
+    display: none;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.24rem;
+    padding: 0;
+  }
+
+  .nav-toggle span {
+    width: 1rem;
+    height: 1px;
+    background: var(--text-dim);
+    display: block;
+  }
+
   .nav-links li {
     display: flex;
     align-items: center;
@@ -720,8 +741,26 @@
     user-select: none;
   }
 
+  @media (max-width: 900px) {
+    .nav {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      display: none;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .nav.menu-open .nav-links { display: flex; }
+    .nav-divider { display: none; }
+  }
+
   @media (max-width: 600px) {
-    .nav-links { display: none; }
     .phase-body { padding-left: 2rem; }
     .phase-num { font-size: 2rem; }
   }
@@ -758,7 +797,10 @@
 
 <nav class="nav">
   <div class="nav-logo">// IRONLOOP</div>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="primary-nav">
     <li><a href="#concept">Concept</a></li>
     <li><a href="#hardware">Hardware</a></li>
     <li><a href="#phases">Phases</a></li>
@@ -1340,5 +1382,32 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
   </footer>
 
 </div>
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+
+  const closeMenu = () => {
+    nav.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  nav.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 900px)').matches) closeMenu();
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+})();
+</script>
 </body>
 </html>
