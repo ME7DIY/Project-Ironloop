@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 02 Research - Minimum Signals for ME7 Bench Bring-Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: "Share Tech Mono", monospace;
+    --display: "Barlow Condensed", sans-serif;
+    --body: "Barlow", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(10,11,13,0.92);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+  }
+
+  .nav-row {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 2rem 1.3rem 4rem;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    margin-bottom: 0.65rem;
+  }
+
+  h1 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    line-height: 0.95;
+    font-size: clamp(1.9rem, 5.3vw, 3.9rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .meta {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .panel {
+    background: linear-gradient(160deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    padding: 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  h2 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 1.35rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.45rem;
+  }
+
+  h3 {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    margin: 0.7rem 0 0.3rem;
+  }
+
+  p { color: var(--text-dim); }
+
+  ul, ol {
+    margin-left: 1.2rem;
+    color: var(--text-dim);
+  }
+
+  .note {
+    border: 1px solid rgba(232,83,10,0.35);
+    background: rgba(232,83,10,0.08);
+    padding: 0.7rem 0.8rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-top: 0.6rem;
+  }
+
+  code {
+    font-family: var(--mono);
+    color: var(--green);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+  }
+
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    font-size: 0.66rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.55rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.52rem 0.55rem;
+    border-bottom: 1px solid rgba(30,37,48,0.6);
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+
+  td strong { color: var(--text); }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    table { font-size: 0.84rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="nav-logo">// PHASE 02 RESEARCH</div>
+    <ul class="nav-links">
+      <li><a href="../../ME7-HIL-Project.html">Main Project</a></li>
+      <li><a href="../index.html">Research Index</a></li>
+      <li><a href="../../Guides/index.html">Guides</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="eyebrow">Project IRONLOOP</div>
+  <h1>Phase 2 Minimum Signals Research</h1>
+  <div class="meta">Research Reference - March 6, 2026</div>
+
+  <section class="panel">
+    <h2>Objective</h2>
+    <p>Define the smallest practical signal set needed for Bosch ME7 bench bring-up in Phase 2 so the ECU powers, reads plausible inputs, and avoids immediate diagnostic shutdown behavior. This page is scoped to minimum viable emulation, not full closed-loop realism.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Minimum Required Inputs</h2>
+    <p>These are the highest-priority channels to emulate first:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Why It Matters</th>
+          <th>Bridge Source</th>
+          <th>Output Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>TPS / throttle angle</strong></td>
+          <td>Driver/load plausibility and idle/load transitions.</td>
+          <td><code>engine.throttle</code></td>
+          <td>MCP4728 DAC voltage</td>
+        </tr>
+        <tr>
+          <td><strong>MAP / manifold pressure</strong></td>
+          <td>Core load determination and fuel base calculation.</td>
+          <td><code>engine.manifold_pressure</code></td>
+          <td>MCP4728 DAC voltage</td>
+        </tr>
+        <tr>
+          <td><strong>IAT intake temp</strong></td>
+          <td>Air-density compensation and fallback logic checks.</td>
+          <td><code>engine.intake_temp_c</code></td>
+          <td>Digital pot or resistance emulation</td>
+        </tr>
+        <tr>
+          <td><strong>ECT coolant temp</strong></td>
+          <td>Warm-up behavior, enrichment, and protection states.</td>
+          <td>Mapped engine thermal model value</td>
+          <td>Digital pot or resistance emulation</td>
+        </tr>
+        <tr>
+          <td><strong>Narrowband O2</strong></td>
+          <td>Lambda correction path and fault suppression during checks.</td>
+          <td><code>engine.exhaust_o2</code> mapped to NB curve</td>
+          <td>MCP4728 DAC voltage</td>
+        </tr>
+        <tr>
+          <td><strong>System voltage awareness</strong></td>
+          <td>Several corrections and plausibility gates depend on battery conditions.</td>
+          <td>Bench PSU measured value</td>
+          <td>Software correction path</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <h2>Target Update Rates and Stability</h2>
+    <ul>
+      <li>Bridge ingest target: <code>50-100 Hz</code> steady processing.</li>
+      <li>Signal output update target: <code>>= 50 Hz</code> with bounded step size on fast-changing channels.</li>
+      <li>Temperature channels should be slew-limited to avoid unrealistic jumps that trigger plausibility checks.</li>
+      <li>O2 narrowband should use sigmoid/filtered switching behavior, not hard one-cycle toggles.</li>
+    </ul>
+    <div class="note">Practical rule: smooth enough to avoid false faults, responsive enough that scanner live data tracks expected changes within ~100-200 ms.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Known Calibrated Behaviors Already Validated in Project</h2>
+    <ul>
+      <li>ECT/IAT resistance saturation issue was corrected (100 ohm pinning fixed).</li>
+      <li>Config-based remap and limits already implemented in bridge configuration.</li>
+      <li>Narrowband O2 modes available: <code>step</code> and <code>sigmoid</code>; sigmoid is preferred.</li>
+      <li>Software-path validation showed plausible ranges for O2 and IAT resistance response.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Phase 2 Bring-Up Sequence</h2>
+    <ol>
+      <li>Start with static-safe values on all minimum channels and confirm ECU communication over bench OBD.</li>
+      <li>Enable TPS + MAP dynamics only; verify readings follow expected direction and no severe DTC storm.</li>
+      <li>Add IAT/ECT thermistor emulation with conservative slew limits.</li>
+      <li>Enable narrowband O2 emulation and verify lambda-related behavior remains stable.</li>
+      <li>Capture and review logs for all output channels plus diagnostic codes after each step.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>Minimum Pass Criteria</h2>
+    <ul>
+      <li>ECU powers consistently on bench and remains communicative for repeated sessions.</li>
+      <li>Live data shows coherent movement for TPS, MAP, IAT, ECT, and O2 channels.</li>
+      <li>No persistent critical sensor implausibility faults on minimum-signal channels.</li>
+      <li>Bridge can run at target rate and log outputs without dropped processing loops.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Immediate Next Tasks</h2>
+    <ul>
+      <li>Add a dedicated <code>phase2_minimum</code> bridge profile with conservative clamps and slew limits.</li>
+      <li>Add optional dual sink logging (<code>stub+csv</code>) for every bench test run.</li>
+      <li>Create ECU-part-number-specific pin sheet before final harness commit.</li>
+    </ul>
+  </section>
+</main>
+
+</body>
+</html>
+

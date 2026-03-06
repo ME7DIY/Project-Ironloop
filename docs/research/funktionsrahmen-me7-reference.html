@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ME7 Funktionsrahmen Digest | IRONLOOP Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --accent2: #f0920a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: "Share Tech Mono", monospace;
+    --display: "Barlow Condensed", sans-serif;
+    --body: "Barlow", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(10,11,13,0.92);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+  }
+
+  .nav-row {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover,
+  .nav-links .active { color: var(--accent); }
+
+  .nav-toggle {
+    display: none;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.24rem;
+    padding: 0;
+  }
+
+  .nav-toggle span {
+    width: 1rem;
+    height: 1px;
+    background: var(--text-dim);
+    display: block;
+  }
+
+  .hero {
+    padding: 4.8rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.74rem;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-family: var(--display);
+    font-size: clamp(2.1rem, 6.8vw, 4.4rem);
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    max-width: 840px;
+    color: var(--text-dim);
+  }
+
+  .metrics {
+    margin-top: 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .metric {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--blue);
+    border: 1px solid rgba(10,180,240,0.35);
+    background: rgba(10,180,240,0.08);
+    padding: 0.22rem 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .jump-wrap {
+    margin: 2rem 0 2.6rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(160deg, var(--surface), var(--surface2));
+    padding: 1rem;
+  }
+
+  .jump-title {
+    font-family: var(--mono);
+    color: var(--green);
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .jump-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 0.55rem;
+  }
+
+  .jump-link {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: rgba(24,28,35,0.7);
+    padding: 0.6rem 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .jump-link:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  section.content {
+    padding: 2rem 0 0.4rem;
+  }
+
+  .section {
+    margin-bottom: 1.1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    scroll-margin-top: 5.6rem;
+  }
+
+  .section-head {
+    padding: 1rem 1rem 0.5rem;
+    border-bottom: 1px solid rgba(30,37,48,0.7);
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 1.45rem;
+    margin-top: 0.2rem;
+    line-height: 1;
+  }
+
+  .section-body {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .section-body p {
+    color: var(--text-dim);
+    font-size: 0.93rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.55rem;
+    margin: 0.7rem 0 0.45rem;
+  }
+
+  .module-card {
+    border: 1px solid rgba(30,37,48,0.9);
+    background: rgba(24,28,35,0.68);
+    padding: 0.78rem;
+  }
+
+  .module-file {
+    font-family: var(--mono);
+    color: var(--green);
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .module-title {
+    font-family: var(--display);
+    text-transform: uppercase;
+    line-height: 1.05;
+    font-size: 1.02rem;
+    margin: 0.35rem 0 0.42rem;
+  }
+
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.34rem;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    color: var(--blue);
+    border: 1px solid rgba(10,180,240,0.32);
+    background: rgba(10,180,240,0.09);
+    padding: 0.12rem 0.36rem;
+    letter-spacing: 0.06em;
+  }
+
+  .callout {
+    border: 1px solid rgba(232,83,10,0.35);
+    background: rgba(232,83,10,0.07);
+    color: var(--text-dim);
+    padding: 0.72rem 0.84rem;
+    font-size: 0.88rem;
+    margin: 0.74rem 0;
+  }
+
+  .focus-list {
+    list-style: none;
+    margin-top: 0.55rem;
+  }
+
+  .focus-list li {
+    border-top: 1px solid rgba(30,37,48,0.7);
+    padding: 0.52rem 0;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .focus-list li strong { color: var(--text); }
+
+  table.source-map {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+  }
+
+  .source-map th {
+    text-align: left;
+    padding: 0.6rem 0.55rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    color: var(--text-dim);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .source-map td {
+    padding: 0.58rem 0.55rem;
+    border-bottom: 1px solid rgba(30,37,48,0.6);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+
+  .source-map td strong { color: var(--text); }
+
+  .footer-note {
+    margin-top: 0.8rem;
+    font-size: 0.84rem;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 780px) {
+    .wrapper, .nav-row { padding: 0 1rem; }
+    .nav-row { flex-wrap: wrap; }
+    .nav-toggle { display: inline-flex; margin-left: auto; }
+    .nav-links {
+      display: none;
+      width: 100%;
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .nav.menu-open .nav-links { display: flex; }
+    .jump-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .jump-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="nav-logo">// IRONLOOP RESEARCH</div>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="reference-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="reference-nav">
+      <li><a href="../index.html">Main Project</a></li>
+      <li><a href="./index.html">Research Index</a></li>
+      <li><a href="../roadmap/index.html">Roadmap</a></li>
+      <li><a href="../guides/index.html">Guides</a></li>
+      <li><a class="active" href="./funktionsrahmen-me7-reference.html">Funktionsrahmen</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <section class="hero">
+    <div class="eyebrow">General Reference / ME7.1 Corpus</div>
+    <h1 class="title">ME7 Funktionsrahmen Digest</h1>
+    <p class="subtitle">This page condenses the extracted Funktionsrahmen corpus into implementation-focused sections for Project IRONLOOP. It is organized for fast navigation and practical use during phase execution, not as a raw text dump.</p>
+    <div class="metrics">
+      <span class="metric">15 topic files</span>
+      <span class="metric">192 source sections</span>
+      <span class="metric">1.88 MB extracted text</span>
+      <span class="metric">Top density: fuel + diagnostics</span>
+    </div>
+  </section>
+
+  <div class="jump-wrap">
+    <div class="jump-title">Jump To Section</div>
+    <div class="jump-grid">
+      <a class="jump-link" href="#overview">Corpus Overview</a>
+      <a class="jump-link" href="#sensor-paths">Sensor Emulation Paths</a>
+      <a class="jump-link" href="#trigger-sync">Crank/Cam Trigger and Sync</a>
+      <a class="jump-link" href="#fuel-lambda">Fuel and Lambda Control</a>
+      <a class="jump-link" href="#ignition-knock">Ignition and Knock</a>
+      <a class="jump-link" href="#torque-idle-trans">Torque, Idle, Transmission</a>
+      <a class="jump-link" href="#diagnostics">Diagnostics and Fallbacks</a>
+      <a class="jump-link" href="#implementation">IRONLOOP Extraction Plan</a>
+      <a class="jump-link" href="#source-map">Full Source Map</a>
+    </div>
+  </div>
+
+  <section class="content">
+
+    <article id="overview" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 01</div>
+        <h2 class="section-title">Corpus Overview</h2>
+      </div>
+      <div class="section-body">
+        <p>The source folder includes broad ME7.1 logic coverage: air charge, speed/crankshaft processing, fuel, lambda emissions, ignition, knock, torque management, transmission, VVT camshaft control, and diagnostics. For IRONLOOP, the highest-value portions are where sensor conversion, trigger timing, and fault-path behavior intersect with bench emulation.</p>
+        <p>Largest source files are <strong>fuel injection (43 sections)</strong>, <strong>diagnostics (37 sections)</strong>, <strong>emissions lambda (26 sections)</strong>, and <strong>air charge (25 sections)</strong>. These together define most of the practical behavior we need to mimic or observe.</p>
+        <div class="callout">
+          Source path reviewed: <code>C:\Users\kitza\Documents\Project-Ironloop\Research\General-Reference\Funktionsrahmen\me7-gpt-120b</code><br>
+          This digest prioritizes implementation relevance for Phases 2 to 4.
+        </div>
+      </div>
+    </article>
+
+    <article id="sensor-paths" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 02</div>
+        <h2 class="section-title">Sensor Emulation Paths</h2>
+      </div>
+      <div class="section-body">
+        <p>Use this block to define what the bridge must generate for stable ECU perception: load/airmass, pressure, intake and coolant temperatures, and voltage-aware substitutions.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_air_charge.txt</div>
+            <div class="module-title">Load and Air Charge Core</div>
+            <div class="chip-row">
+              <span class="chip">EGFE</span><span class="chip">BGRLG</span><span class="chip">BGRLP</span><span class="chip">BGWDKM</span><span class="chip">MDFUE</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_temperature_sensors.txt</div>
+            <div class="module-title">Temperature Acquisition and Model Fallback</div>
+            <div class="chip-row">
+              <span class="chip">GGGTS</span><span class="chip">GGTFM</span><span class="chip">GGTFA</span><span class="chip">GGATS</span><span class="chip">TEMPKON</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_battery_electrical.txt</div>
+            <div class="module-title">Electrical and Standstill Timing Effects</div>
+            <div class="chip-row">
+              <span class="chip">BGTABST</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Phase-02 focus:</strong> keep analog outputs inside plausibility windows and include substitute-value behavior for sensor faults/timeouts.</li>
+          <li><strong>Bridge mapping:</strong> tie engine-sim RPM, manifold pressure, intake temp, and throttle state into calibrated voltage/resistance outputs with clamps.</li>
+          <li><strong>Validation target:</strong> no immediate DTC flood at idle-equivalent bench condition.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="trigger-sync" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 03</div>
+        <h2 class="section-title">Crank/Cam Trigger and Sync</h2>
+      </div>
+      <div class="section-body">
+        <p>These functions are critical for Phase 3. They define how ME7 validates crank speed signals, cam phasing, and synchronization state transitions before normal combustion logic is trusted.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_speed_crankshaft.txt</div>
+            <div class="module-title">Speed Processing and Sync Supervision</div>
+            <div class="chip-row">
+              <span class="chip">SYSYNC</span><span class="chip">BGNG</span><span class="chip">NLDG</span><span class="chip">GGZDGON</span><span class="chip">DDG</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_vvt_camshaft.txt</div>
+            <div class="module-title">Camshaft Assignment and Phase Checks</div>
+            <div class="chip-row">
+              <span class="chip">DNWKW</span><span class="chip">NWSOLLE</span><span class="chip">NWFW</span><span class="chip">ALE</span><span class="chip">GGNW</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Signal quality priority:</strong> timing jitter and missing-tooth phase errors can move ECU straight into diagnostic paths.</li>
+          <li><strong>Bring-up order:</strong> first stable RPM detection, then cam phase relationship, then dynamic RPM changes.</li>
+          <li><strong>Bench evidence to capture:</strong> logic-analyzer traces aligned with ECU-measured RPM and sync flags.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="fuel-lambda" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 04</div>
+        <h2 class="section-title">Fuel and Lambda Control</h2>
+      </div>
+      <div class="section-body">
+        <p>These files describe fueling calculations, enrichment behavior, lambda regulation, heater handling, and correction structures. This is key for moving from basic ECU wake-up into believable combustion-state behavior.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_fuel_injection.txt</div>
+            <div class="module-title">Injection Core and Compensation</div>
+            <div class="chip-row">
+              <span class="chip">BGLBZ</span><span class="chip">GGFST</span><span class="chip">FUEREG</span><span class="chip">ESVW</span><span class="chip">UFACCC</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_emissions_lambda.txt</div>
+            <div class="module-title">Lambda Control and Catalyst Paths</div>
+            <div class="chip-row">
+              <span class="chip">LRS</span><span class="chip">LRSINI</span><span class="chip">LRSHK</span><span class="chip">BGMSABG</span><span class="chip">TUSLASH</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Phase-02/04 linkage:</strong> simulated narrowband behavior must be stable across warm-up and load transitions.</li>
+          <li><strong>Logging recommendation:</strong> capture lambda correction terms with injector pulse interpretation once closed-loop starts.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="ignition-knock" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 05</div>
+        <h2 class="section-title">Ignition and Knock</h2>
+      </div>
+      <div class="section-body">
+        <p>Ignition strategy and knock management define how ME7 protects the engine when modeled load changes. In HIL context, these blocks become important once feedback from ECU decisions modifies simulation state.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_ignition.txt</div>
+            <div class="module-title">Ignition Angle Stack</div>
+            <div class="chip-row">
+              <span class="chip">ZWSTT</span><span class="chip">ZWWL</span><span class="chip">ZWOB</span><span class="chip">MDZW</span><span class="chip">ZWMIN</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_knock_detection.txt</div>
+            <div class="module-title">Knock Detection and Retard Enable</div>
+            <div class="chip-row">
+              <span class="chip">EGKE</span><span class="chip">DKRNT</span><span class="chip">DKRTP</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Phase-04 relevance:</strong> ignition and knock response should feed back into torque delta in the simulation model.</li>
+          <li><strong>Safety behavior:</strong> keep conservative thresholds during early loop closure to avoid unstable oscillation.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="torque-idle-trans" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 06</div>
+        <h2 class="section-title">Torque, Idle, and Transmission Coordination</h2>
+      </div>
+      <div class="section-body">
+        <p>This group is where driver request, constraints, and drivetrain context are coordinated. It is useful for designing feedback channels and future AI tuning objectives.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_torque_management.txt</div>
+            <div class="module-title">Torque Limits and Arbitration</div>
+            <div class="chip-row">
+              <span class="chip">MDZUL</span><span class="chip">MDBAS</span><span class="chip">DUR</span><span class="chip">UFMSRC</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_idle_control.txt</div>
+            <div class="module-title">Idle Stability Baseline</div>
+            <div class="chip-row">
+              <span class="chip">MDVERAD</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">me7_transmission.txt</div>
+            <div class="module-title">Gear Context and Shift Requests</div>
+            <div class="chip-row">
+              <span class="chip">BBGANG</span><span class="chip">DKUPPL</span><span class="chip">BGGNSOL</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Closed-loop impact:</strong> torque limits can dominate expected response even when fuel/ignition commands look aggressive.</li>
+          <li><strong>Future AI target:</strong> optimize within torque and protection constraints, not outside them.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="diagnostics" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 07</div>
+        <h2 class="section-title">Diagnostics and Fallback Paths</h2>
+      </div>
+      <div class="section-body">
+        <p>The diagnostics corpus is the largest operational risk area. It includes fault debouncing, readiness logic, cycle counters, and substitute-path decisions that can override normal control quickly.</p>
+        <div class="module-grid">
+          <div class="module-card">
+            <div class="module-file">me7_diagnostics.txt</div>
+            <div class="module-title">OBD State, Fault Memory, and Trigger Logic</div>
+            <div class="chip-row">
+              <span class="chip">BGKMST</span><span class="chip">DMDMON</span><span class="chip">DTRIG</span><span class="chip">DTIP</span><span class="chip">DNMAX</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-file">Cross-file pattern</div>
+            <div class="module-title">Common Fault Flags and Debounce Timers</div>
+            <div class="chip-row">
+              <span class="chip">B_MX</span><span class="chip">B_MN</span><span class="chip">B_SI</span><span class="chip">B_NP</span><span class="chip">C_FCMCLR</span>
+            </div>
+          </div>
+        </div>
+        <ul class="focus-list">
+          <li><strong>Bench priority:</strong> emulate stable sensor plausibility before adding advanced behaviors.</li>
+          <li><strong>Instrumentation:</strong> log raw values, post-clamp values, and active fallback flags together so faults are explainable.</li>
+          <li><strong>Execution habit:</strong> treat each new output channel as potential DTC trigger until proven stable.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="implementation" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 08</div>
+        <h2 class="section-title">IRONLOOP Extraction Plan</h2>
+      </div>
+      <div class="section-body">
+        <p>This is the practical subset to pull into active project docs and code comments first:</p>
+        <ul class="focus-list">
+          <li><strong>1) Sensor core pack:</strong> air charge + temperatures + fallback thresholds (Phase 2).</li>
+          <li><strong>2) Trigger and sync pack:</strong> crank/cam acceptance windows and timeout behavior (Phase 3).</li>
+          <li><strong>3) Fuel/lambda pack:</strong> narrowband behavior and correction dependencies (Phase 2 to 4).</li>
+          <li><strong>4) Torque interaction pack:</strong> requested vs permitted torque structure (Phase 4+).</li>
+          <li><strong>5) Diagnostic gate pack:</strong> fault/debounce patterns to prevent false negatives during bench bring-up.</li>
+        </ul>
+        <div class="callout">
+          Recommended workflow: convert each pack into a small IRONLOOP-specific reference sheet with
+          <code>signals</code>, <code>equations</code>, <code>fault gates</code>, and <code>bench validation criteria</code>.
+        </div>
+      </div>
+    </article>
+
+    <article id="source-map" class="section">
+      <div class="section-head">
+        <div class="section-label">Section 09</div>
+        <h2 class="section-title">Full Source Map</h2>
+      </div>
+      <div class="section-body">
+        <table class="source-map">
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Sections</th>
+              <th>Primary Theme</th>
+              <th>Use Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>me7_air_charge.txt</strong></td><td>25</td><td>Load and air charge</td><td>High</td></tr>
+            <tr><td><strong>me7_battery_electrical.txt</strong></td><td>1</td><td>Battery and standstill behavior</td><td>Medium</td></tr>
+            <tr><td><strong>me7_boost_turbo.txt</strong></td><td>1</td><td>Turbo valve diagnostics</td><td>Medium</td></tr>
+            <tr><td><strong>me7_diagnostics.txt</strong></td><td>37</td><td>OBD and fault handling</td><td>High</td></tr>
+            <tr><td><strong>me7_emissions_lambda.txt</strong></td><td>26</td><td>Lambda and catalyst control</td><td>High</td></tr>
+            <tr><td><strong>me7_fuel_injection.txt</strong></td><td>43</td><td>Fuel calculations and regulation</td><td>High</td></tr>
+            <tr><td><strong>me7_general_control.txt</strong></td><td>2</td><td>Core control helpers</td><td>Low</td></tr>
+            <tr><td><strong>me7_idle_control.txt</strong></td><td>1</td><td>Idle speed management</td><td>Medium</td></tr>
+            <tr><td><strong>me7_ignition.txt</strong></td><td>4</td><td>Ignition strategy</td><td>High</td></tr>
+            <tr><td><strong>me7_knock_detection.txt</strong></td><td>1</td><td>Knock detection</td><td>High</td></tr>
+            <tr><td><strong>me7_speed_crankshaft.txt</strong></td><td>20</td><td>Crank speed and sync</td><td>High</td></tr>
+            <tr><td><strong>me7_temperature_sensors.txt</strong></td><td>8</td><td>Sensor models and temperature fallbacks</td><td>High</td></tr>
+            <tr><td><strong>me7_torque_management.txt</strong></td><td>9</td><td>Torque arbitration</td><td>Medium</td></tr>
+            <tr><td><strong>me7_transmission.txt</strong></td><td>4</td><td>Transmission interface</td><td>Medium</td></tr>
+            <tr><td><strong>me7_vvt_camshaft.txt</strong></td><td>10</td><td>VVT and cam-crank relationship</td><td>High</td></tr>
+          </tbody>
+        </table>
+        <p class="footer-note">Source index used: <code>me7_index.txt</code> in the Funktionsrahmen folder.</p>
+      </div>
+    </article>
+
+  </section>
+</div>
+
+<script>
+(() => {
+  const nav = document.querySelector(".nav");
+  const toggle = document.querySelector(".nav-toggle");
+  if (!nav || !toggle) return;
+
+  const closeMenu = () => {
+    nav.classList.remove("menu-open");
+    toggle.setAttribute("aria-expanded", "false");
+  };
+
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  nav.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 780px)").matches) closeMenu();
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 780) closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>
