@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRONLOOP - ME7 Bench Bring-Up Buying Guide</title>
+<title>IRONLOOP - ME7 Bench Bring-Up Order Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -228,14 +228,57 @@
   <div class="wrap">
     <section class="hero">
       <div class="eyebrow">Private Build Document</div>
-      <h1 class="title">ME7 Bench Bring-Up <span>Buying Guide</span></h1>
+      <h1 class="title">ME7 Bench Bring-Up <span>Order Guide</span></h1>
       <p class="sub">
-        This is the detailed order plan for starting IRONLOOP hardware bring-up without guessing.
-        It is split into: buy now (to start safely), buy next (for first ECU signal work), and buy later (for deeper loop work).
-        Links are included so you can source everything quickly.
+        Updated ordering and execution plan for IRONLOOP bench hardware bring-up, aligned to the
+        latest ECU pin evidence for <strong>8E0 909 518 AK (ME7.5 0004)</strong>.
+        Split into: order now (safe power + known-good comms path), order next (sensor signal work),
+        and hold items (until unresolved pin behavior is bench-confirmed).
       </p>
       <div class="callout">
-        IMPORTANT: Connector pinout parts are ECU-variant specific. Before final connector order, confirm your Bosch and VAG part numbers.
+        IMPORTANT: This page now follows the AK pinout confidence model. Treat `T121/1,2,3,62,43` as core.
+        Keep `T121/21` and `T121/121` as verify-required, not mandatory buys.
+      </div>
+      <div class="callout">
+        Cross-check references before ordering harness parts:
+        <a href="pinout-diagrams-8e0-909-518-ak-me7-5-0004.html">AK Pinout Guide</a>,
+        <a href="pinout-golden-worksheet-8e0-909-518-ak.html">Golden Worksheet</a>,
+        <a href="me7-bench-core-quickstart-card.html">Bench Core Quickstart</a>.
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">AK Pin Reality Update (2026-03-07)</div>
+        <div class="sec-tag">Order Gate</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Pin Group</th>
+              <th>Status</th>
+              <th>What This Means For Ordering</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">T121/1, T121/2, T121/3, T121/62, T121/43<br>T16/4, T16/5, T16/7, T16/16</td>
+              <td><span class="status must">Factory-Backed Core</span></td>
+              <td>Safe to buy and build around these as minimum bench power/comms core.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/58, T121/60</td>
+              <td><span class="status next">Confirmed Optional</span></td>
+              <td>Buy only if CAN path is needed for your test workflow; K-line-first can proceed without it.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/21, T121/121</td>
+              <td><span class="status later">Verify Required</span></td>
+              <td>Do not make these mandatory in purchase quantities until bench role is confirmed on your exact setup.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -406,13 +449,15 @@
             </tr>
             <tr>
               <td>OBD/Diagnostic Interface</td>
-              <td class="mono">1</td>
-              <td>Reliable VAG diagnostics interface for ME7 fault/live data checks.</td>
+              <td class="mono">1-2</td>
+              <td>Primary K-line bench interface now. Keep one robust cable plus one spare.</td>
               <td>
+                <a href="https://www.ftdichip.com/Products/Cables/USBTTLSerial.htm" target="_blank" rel="noopener noreferrer">FTDI USB serial references</a><br>
+                KKL/409.1 style K-line cable (FTDI-preferred for stability)<br>
                 <a href="https://www.ross-tech.com/vcds/hex-v2.php" target="_blank" rel="noopener noreferrer">Ross-Tech HEX-V2 details</a><br>
-                <a href="https://store.ross-tech.com/shop/vchv2_ent/" target="_blank" rel="noopener noreferrer">HEX-V2 Enthusiast store</a>
+                <a href="https://store.ross-tech.com/shop/vchv2_ent/" target="_blank" rel="noopener noreferrer">HEX-V2 Enthusiast store</a> (optional premium path)
               </td>
-              <td class="money">$199-299</td>
+              <td class="money">$15-299</td>
               <td><span class="status must">Must</span></td>
             </tr>
             <tr>
@@ -475,9 +520,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>ECU Connector Housings + locks</td>
+              <td>ECU Connector Housings + locks (AK-matched)</td>
               <td class="mono">1 set</td>
-              <td>Correct mating shells for your ME7 variant.</td>
+              <td>Match exactly to `8E0 909 518 AK` T121 housing style and lock family.</td>
               <td>Corsa Technic / OEM harness salvage / connector specialists</td>
               <td><span class="status must">Must</span></td>
             </tr>
@@ -491,9 +536,9 @@
               <td><span class="status must">Must</span></td>
             </tr>
             <tr>
-              <td>Bench ECU harness body</td>
+              <td>Bench ECU harness body (core-first build)</td>
               <td class="mono">1</td>
-              <td>Pigtail or full breakout harness for ECU bench test.</td>
+              <td>Pigtail or breakout harness that guarantees clean access to core pins first (`1/2/3/62/43`).</td>
               <td>Prebuilt bench-harness vendors or DIY from donor harness</td>
               <td><span class="status must">Must</span></td>
             </tr>
@@ -507,19 +552,20 @@
         <h3>Estimated Spend</h3>
         <ul>
           <li>Batch A (safe bring-up): roughly $600 - $1,000</li>
-          <li>Batch B (signal + logging): roughly $450 - $1,100</li>
+          <li>Batch B (signal + logging): roughly $300 - $1,100</li>
           <li>ME7 connector/harness parts: highly variable ($100 - $500)</li>
-          <li>Total practical range: about $1,150 - $2,600</li>
+          <li>Total practical range: about $1,000 - $2,600</li>
         </ul>
       </div>
       <div class="box">
         <h3>Order Sequence (Recommended)</h3>
         <ul>
-          <li>1) Power safety parts + bench PSU</li>
-          <li>2) Pi 5 + storage + cooling</li>
-          <li>3) DAC + digital pot + wire consumables</li>
-          <li>4) Diagnostics and logging tools</li>
-          <li>5) Only then buy exact ECU connector parts (after ECU PN confirmation)</li>
+          <li>1) Lock core pin worksheet (`1/2/3/62/43`, OBD `4/5/7/16`)</li>
+          <li>2) Power safety parts + bench PSU</li>
+          <li>3) K-line interface + continuity tools</li>
+          <li>4) Pi 5 + storage + cooling</li>
+          <li>5) DAC + digital pot + wire consumables</li>
+          <li>6) Build harness core first, then optional/verify branches (`21/121`, CAN)</li>
         </ul>
       </div>
     </div>
@@ -539,6 +585,7 @@
         <h3>What Not To Buy Yet</h3>
         <ul>
           <li>Random ECU connector kits without matching your exact ME7 part number</li>
+          <li>Treating `T121/21` or `T121/121` as mandatory before bench verification</li>
           <li>High-cost crank/cam conditioning boards before basic power + analog validation</li>
           <li>Exotic instrumentation unless you already know the exact measurement gap</li>
           <li>Bulk quantities of terminals until final pin map is locked</li>
@@ -547,7 +594,7 @@
     </div>
 
     <footer class="footer">
-      Generated for private local use. Update this file after ECU part-number identification and first hardware arrival check.
+      Updated for AK pin-confidence workflow (2026-03-07). Re-check after each ElsaWin-backed pin promotion.
     </footer>
   </div>
 </body>
