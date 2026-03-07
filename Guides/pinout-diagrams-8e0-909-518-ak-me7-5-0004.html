@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRONLOOP - Pinout Diagrams (8E0 909 518 AK ME7.5)</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --accent2: #f0920a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --red: #f04a4a;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.55) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 3.25rem 0 1.6rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.95rem;
+  }
+  .title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.2rem, 7.5vw, 4.6rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .title span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+  .sub {
+    margin-top: 1rem;
+    max-width: 920px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .callout {
+    margin-top: 1.2rem;
+    border: 1px solid rgba(240,146,10,0.35);
+    background: rgba(240,146,10,0.08);
+    padding: 0.75rem 0.9rem;
+    color: #dfbf89;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  .sec {
+    margin-top: 1.25rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(165deg, var(--surface), var(--surface2));
+  }
+  .sec-hd {
+    border-bottom: 1px solid var(--border);
+    padding: 0.78rem 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .sec-title {
+    font-family: var(--display);
+    font-size: 1.24rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .sec-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    border: 1px solid rgba(74,85,104,0.65);
+    color: var(--text-dim);
+    padding: 0.22rem 0.5rem;
+    white-space: nowrap;
+  }
+  .sec-bd {
+    padding: 0.82rem 0.95rem 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding: 0.52rem 0.45rem;
+  }
+  td {
+    vertical-align: top;
+    border-bottom: 1px solid rgba(30,37,48,0.55);
+    padding: 0.58rem 0.45rem;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid;
+    padding: 0.18rem 0.4rem;
+  }
+  .high { color: var(--green); border-color: rgba(12,240,122,0.35); background: rgba(12,240,122,0.08); }
+  .mid { color: var(--accent2); border-color: rgba(240,146,10,0.35); background: rgba(240,146,10,0.08); }
+  .verify { color: var(--red); border-color: rgba(240,74,74,0.35); background: rgba(240,74,74,0.08); }
+
+  .mono {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--text-dim);
+  }
+
+  pre {
+    margin-top: 0.5rem;
+    padding: 0.9rem;
+    border: 1px solid var(--border);
+    background: rgba(7, 10, 14, 0.65);
+    color: #a8bacd;
+    overflow: auto;
+    line-height: 1.4;
+    font-size: 0.79rem;
+    font-family: var(--mono);
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.15rem;
+  }
+  .box {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.8rem 0.9rem;
+  }
+  .box h3 {
+    font-family: var(--display);
+    font-size: 1.02rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .box ul { list-style: none; }
+  .box li {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    padding: 0.22rem 0;
+    border-bottom: 1px solid rgba(30,37,48,0.5);
+  }
+  .box li:last-child { border-bottom: none; }
+  .box li::before { content: '> '; color: var(--accent); }
+
+  a {
+    color: #8abde6;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(138,189,230,0.45);
+  }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .footer {
+    margin-top: 1.35rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 920px) {
+    .split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Project IRONLOOP / ECU Pinout Reference</div>
+      <h1 class="title">Pinout Diagrams <span>8E0 909 518 AK</span></h1>
+      <p class="sub">
+        Working bench map for Bosch <strong>ME7.5</strong> (`8E0 909 518 AK`, label `0004`) using T121 connector conventions.
+        This page is built for execution: safe power-up, K-line comms, and staged sensor-layer bring-up.
+      </p>
+      <div class="callout">
+        IMPORTANT: This guide uses confidence-tagged mapping. Core bench pins are high-confidence;
+        full sensor/actuator assignments still require exact factory current-flow confirmation for the exact vehicle/engine context.
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">ECU Identity</div>
+        <div class="sec-tag">Target Unit</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OEM Part Number</td>
+              <td class="mono">8E0 909 518 AK</td>
+            </tr>
+            <tr>
+              <td>Bosch Family</td>
+              <td class="mono">ME7.5</td>
+            </tr>
+            <tr>
+              <td>Variant Label</td>
+              <td class="mono">0004</td>
+            </tr>
+            <tr>
+              <td>Connector Family</td>
+              <td class="mono">T121 (121-pin split modules)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Bench Core Confidence Matrix</div>
+        <div class="sec-tag">Power / Comms</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Pin / Path</th>
+              <th>Function</th>
+              <th>Confidence</th>
+              <th>Bench Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">T121/1, T121/2</td>
+              <td>Ground</td>
+              <td><span class="status high">High</span></td>
+              <td>Mandatory</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/3</td>
+              <td>Switched +12V (KL15)</td>
+              <td><span class="status high">High</span></td>
+              <td>Mandatory</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/62</td>
+              <td>Constant +12V (KL30)</td>
+              <td><span class="status high">High</span></td>
+              <td>Mandatory</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/43</td>
+              <td>K-line diagnostics</td>
+              <td><span class="status high">High</span></td>
+              <td>Mandatory for K-line tools</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/58, T121/60</td>
+              <td>CAN-L / CAN-H</td>
+              <td><span class="status mid">Medium</span></td>
+              <td>Optional in current K-line-first flow</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/21</td>
+              <td>Switched/test relay-path feed</td>
+              <td><span class="status mid">Medium</span></td>
+              <td>Recommended as fused test branch</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/121</td>
+              <td>Additional power path</td>
+              <td><span class="status verify">Verify</span></td>
+              <td>Do not treat as mandatory until verified</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Pinout Diagrams</div>
+        <div class="sec-tag">Execution View</div>
+      </div>
+      <div class="sec-bd">
+        <div class="split">
+          <div class="box">
+            <h3>OBD Bench Port (Front View)</h3>
+            <pre> ______________________________________
+/  1  2  3  4  5  6  7  8              \
+\  9 10 11 12 13 14 15 16              /
+ --------------------------------------
+
+Critical:
+4  = Ground
+5  = Ground
+7  = K-line
+16 = +12V (fused)
+6/14 = CAN H/L (optional)</pre>
+          </div>
+          <div class="box">
+            <h3>Bench Rail Topology</h3>
+            <pre>PSU +12V -> F_MAIN -> CONSTANT_RAIL -> F_62 -> T121/62
+                               |       -> F_OBD16 -> OBD16
+                               |
+                               +-> IGN_SWITCH -> SWITCHED_RAIL -> F_3  -> T121/3
+                                                           \----> F_21 -> T121/21
+
+PSU - -> GROUND_RAIL -> T121/1
+                     -> T121/2
+                     -> OBD4
+                     -> OBD5
+                     -> Pi/Pico/MCP grounds
+
+OBD7 -> T121/43 (K-line)</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Cross-Check Evidence (Local SS Set)</div>
+        <div class="sec-tag">Compared Sources</div>
+      </div>
+      <div class="sec-bd">
+        <p class="sub">
+          Local folder reviewed: <span class="mono">docs/guides/Pinout Diagrams/SS</span> (2 PDFs + 5 screenshots).
+          This set strongly aligns with core pins above and supports common sensor/actuator assignments such as
+          `82/90` crank, `85` IAT, `93` ECT, `104` N75, `105` N249, `117/118` throttle drive.
+        </p>
+        <div class="split">
+          <div class="box">
+            <h3>Strongly Supported</h3>
+            <ul>
+              <li>T121/1,2 ground</li>
+              <li>T121/3 switched feed path</li>
+              <li>T121/43 K-line</li>
+              <li>T121/62 power supply</li>
+              <li>T121/58,60 bus low/high context</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Still Variant-Sensitive</h3>
+            <ul>
+              <li>T121/21 behavior (keep fused test branch)</li>
+              <li>T121/121 requirement</li>
+              <li>Exact sensor/actuator map by vehicle/engine</li>
+              <li>Final authority = factory current-flow docs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Next Step Checklist</div>
+        <div class="sec-tag">Bench Bring-Up</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Action</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Continuity check all power/comms lines</td>
+              <td class="mono">[ ]</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Verify no short between +12V rails and ground</td>
+              <td class="mono">[ ]</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Power with current-limited PSU only</td>
+              <td class="mono">[ ]</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Confirm K-line communication over OBD7 -> T121/43</td>
+              <td class="mono">[ ]</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Validate `3/21/62` behavior on this exact ECU</td>
+              <td class="mono">[ ]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>Project IRONLOOP / Guides / Pinout Diagrams</span>
+      <span><a href="index.html">Back To Guides Index</a></span>
+    </div>
+  </div>
+</body>
+</html>
