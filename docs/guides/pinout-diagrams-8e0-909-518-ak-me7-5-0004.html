@@ -287,8 +287,8 @@
         This page is built for execution: safe power-up, K-line comms, and staged sensor-layer bring-up.
       </p>
       <div class="callout">
-        IMPORTANT: This guide uses confidence-tagged mapping. Core bench pins are high-confidence;
-        full sensor/actuator assignments still require exact factory current-flow confirmation for the exact vehicle/engine context.
+        STATUS: Core and major sensor/actuator mappings on this page are now upgraded with ElsaWin
+        factory current-flow confirmation from your AMB capture set. Remaining unresolved items are explicitly flagged.
       </div>
       <div class="callout">
         Want a step-by-step truth sheet? Use the
@@ -339,7 +339,7 @@
 
     <section class="sec">
       <div class="sec-hd">
-        <div class="sec-title">Bench Core Confidence Matrix</div>
+        <div class="sec-title">Bench Core Status Matrix</div>
         <div class="sec-tag">Power / Comms</div>
       </div>
       <div class="sec-bd">
@@ -348,8 +348,8 @@
             <tr>
               <th>Pin / Path</th>
               <th>Function</th>
-              <th>Confidence</th>
-              <th>Bench Use</th>
+              <th>Evidence</th>
+              <th>Bench Use / Notes</th>
             </tr>
           </thead>
           <tbody>
@@ -357,43 +357,43 @@
               <td class="mono">T121/1, T121/2</td>
               <td>Ground</td>
               <td><span class="status high">High</span></td>
-              <td>Mandatory</td>
+              <td>Mandatory (Elsa No.10/4)</td>
             </tr>
             <tr>
               <td class="mono">T121/3</td>
               <td>Switched +12V (KL15)</td>
               <td><span class="status high">High</span></td>
-              <td>Mandatory</td>
+              <td>Mandatory (Elsa No.10/4 via J271 path)</td>
             </tr>
             <tr>
               <td class="mono">T121/62</td>
               <td>Constant +12V (KL30)</td>
               <td><span class="status high">High</span></td>
-              <td>Mandatory</td>
+              <td>Mandatory (Elsa No.10/4)</td>
             </tr>
             <tr>
               <td class="mono">T121/43</td>
               <td>K-line diagnostics</td>
               <td><span class="status high">High</span></td>
-              <td>Mandatory for K-line tools</td>
+              <td>Mandatory for K-line tools (Elsa No.10/11 + No.11/2)</td>
             </tr>
             <tr>
               <td class="mono">T121/58, T121/60</td>
               <td>CAN-L / CAN-H</td>
-              <td><span class="status mid">Medium</span></td>
-              <td>Optional in current K-line-first flow</td>
+              <td><span class="status high">High</span></td>
+              <td>Confirmed bus lines; optional in K-line-first flow</td>
             </tr>
             <tr>
               <td class="mono">T121/21</td>
               <td>Switched/test relay-path feed</td>
-              <td><span class="status mid">Medium</span></td>
-              <td>Recommended as fused test branch</td>
+              <td><span class="status verify">Verify</span></td>
+              <td>Present in Elsa captures; exact functional role still under trace</td>
             </tr>
             <tr>
               <td class="mono">T121/121</td>
               <td>Additional power path</td>
               <td><span class="status verify">Verify</span></td>
-              <td>Do not treat as mandatory until verified</td>
+              <td>Present in Elsa captures; do not treat as mandatory yet</td>
             </tr>
           </tbody>
         </table>
@@ -455,133 +455,32 @@ OBD7 -> T121/43 (K-line)</pre>
 
     <section class="sec">
       <div class="sec-hd">
-        <div class="sec-title">Cross-Check Evidence (Local SS Set)</div>
-        <div class="sec-tag">Compared Sources</div>
+        <div class="sec-title">Evidence Stack</div>
+        <div class="sec-tag">Source Priority</div>
       </div>
       <div class="sec-bd">
         <p class="sub">
-          Local folder reviewed: <span class="mono">docs/guides/Pinout Diagrams/SS</span> (2 PDFs + 5 screenshots).
-          This set strongly aligns with core pins above and supports common sensor/actuator assignments such as
-          `82/90` crank, `85` IAT, `93` ECT, `104` N75, `105` N249, `117/118` throttle drive.
+          Primary source is now your ElsaWin AMB current-flow capture set. The older local SS set remains useful only as
+          historical cross-check context and is no longer treated as primary mapping authority on this page.
         </p>
         <div class="split">
           <div class="box">
-            <h3>Strongly Supported</h3>
+            <h3>Primary (Used Here)</h3>
             <ul>
-              <li>T121/1,2 ground</li>
-              <li>T121/3 switched feed path</li>
-              <li>T121/43 K-line</li>
-              <li>T121/62 power supply</li>
-              <li>T121/58,60 bus low/high context</li>
+              <li>ElsaWin AMB current-flow pages No.10/x</li>
+              <li>ElsaWin diagnostic connector page No.11/2</li>
+              <li>Explicit J220/T16 pin labels and connector paths</li>
             </ul>
           </div>
           <div class="box">
-            <h3>Still Variant-Sensitive</h3>
+            <h3>Secondary (Archive)</h3>
             <ul>
-              <li>T121/21 behavior (keep fused test branch)</li>
-              <li>T121/121 requirement</li>
-              <li>Exact sensor/actuator map by vehicle/engine</li>
-              <li>Final authority = factory current-flow docs</li>
+              <li>docs/guides/Pinout Diagrams/SS evidence set</li>
+              <li>Cross-variant comparison only</li>
+              <li>Kept for audit trail, not final pin authority</li>
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-hd">
-        <div class="sec-title">Sensor / Actuator Pre-Map</div>
-        <div class="sec-tag">SS Evidence Set</div>
-      </div>
-      <div class="sec-bd">
-        <p class="sub">
-          This is the expanded pin list from the local SS comparison set. Treat these as cross-variant
-          medium-confidence mappings until validated against exact factory current-flow docs for this ECU context.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Pin / Pins</th>
-              <th>Signal / Device</th>
-              <th>Context</th>
-              <th>Confidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="mono">T121/82, T121/90</td>
-              <td>G28 Crank speed sensor</td>
-              <td>Engine speed input pair</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/85</td>
-              <td>G42 Intake air temperature</td>
-              <td>IAT sensor input</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/86</td>
-              <td>G40/G163 Cam position context</td>
-              <td>Variant-sensitive labeling by harness</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/93</td>
-              <td>G62 Coolant temperature</td>
-              <td>ECT sensor input</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/96,89,97,88</td>
-              <td>N30..N33 injector outputs</td>
-              <td>4-cylinder injector drive set</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/102,95,103,94</td>
-              <td>Ignition coil outputs</td>
-              <td>4-cylinder ignition drive set</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/104</td>
-              <td>N75 Wastegate regulator valve</td>
-              <td>Boost control output</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/105</td>
-              <td>N249 Recirculating valve</td>
-              <td>DV control output</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/106, T121/107</td>
-              <td>G61/G66 Knock sensors</td>
-              <td>Knock input channels</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/108</td>
-              <td>Sensor ground context</td>
-              <td>Referenced in multi-sensor return paths</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/117, T121/118</td>
-              <td>G186 Throttle drive motor</td>
-              <td>Electronic throttle output pair</td>
-              <td><span class="status mid">Medium</span></td>
-            </tr>
-            <tr>
-              <td class="mono">T121/121</td>
-              <td>J271 relay/power path appearance</td>
-              <td>Seen in set; validate exact AK behavior before use</td>
-              <td><span class="status verify">Verify</span></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
@@ -613,61 +512,115 @@ OBD7 -> T121/43 (K-line)</pre>
             </tr>
             <tr>
               <td class="mono">T121/3</td>
-              <td>Switched supply context (J271 / 15a path)</td>
+              <td>Switched supply (KL15 context via J271 path)</td>
               <td class="mono">No.10/4</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
               <td class="mono">T121/62</td>
-              <td>+30 constant supply context</td>
+              <td>Constant supply (+30 context)</td>
               <td class="mono">No.10/4</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/43 + T16/7</td>
-              <td>K-line path (A76 diagnosis wire K)</td>
+              <td class="mono">T121/43</td>
+              <td>ECU K-line endpoint (A76 diagnosis wire K path)</td>
               <td class="mono">No.10/11 + No.11/2</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T16/4, T16/5, T16/16</td>
-              <td>OBD grounds and +30 fused supply</td>
+              <td class="mono">T16/7</td>
+              <td>OBD K-line</td>
               <td class="mono">No.11/2</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/82,90 / 106,107 / 86,98</td>
-              <td>Crank, knock, cam sensor groups</td>
-              <td class="mono">No.10/7 + No.10/8</td>
+              <td class="mono">T16/4, T16/5</td>
+              <td>OBD grounds</td>
+              <td class="mono">No.11/2</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/85,93,101</td>
-              <td>IAT, coolant sender group, MAP</td>
+              <td class="mono">T16/16</td>
+              <td>OBD +30 fused supply</td>
+              <td class="mono">No.11/2</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/82, T121/90</td>
+              <td>G28 engine speed sender (crank)</td>
+              <td class="mono">No.10/7</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/106, T121/107</td>
+              <td>G61/G66 knock sensor channels</td>
+              <td class="mono">No.10/7</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/86, T121/98</td>
+              <td>G40 Hall sender (cam)</td>
+              <td class="mono">No.10/8</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/85</td>
+              <td>G42 intake air temperature</td>
               <td class="mono">No.10/6</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/96,89,97,88</td>
-              <td>Injector outputs N30..N33</td>
+              <td class="mono">T121/93</td>
+              <td>G62 coolant temperature sender group</td>
+              <td class="mono">No.10/6</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/101</td>
+              <td>G31 charge air pressure (MAP)</td>
+              <td class="mono">No.10/6</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/96, T121/89, T121/97, T121/88</td>
+              <td>N30..N33 injector outputs (cyl 1..4)</td>
               <td class="mono">No.10/5</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/102,95,103,94</td>
-              <td>Ignition coil outputs</td>
+              <td class="mono">T121/102, T121/95, T121/103, T121/94</td>
+              <td>Ignition coil outputs (cyl 1..4)</td>
               <td class="mono">No.10/11</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
-              <td class="mono">T121/104,105,115,64</td>
-              <td>N75, N249, N205, N112 control outputs</td>
-              <td class="mono">No.10/6 + No.10/8</td>
+              <td class="mono">T121/104</td>
+              <td>N75 charge pressure control solenoid</td>
+              <td class="mono">No.10/6</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/105</td>
+              <td>N249 turbocharger divert air valve</td>
+              <td class="mono">No.10/6</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/115</td>
+              <td>N205 inlet camshaft timing adjustment valve</td>
+              <td class="mono">No.10/8</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/64</td>
+              <td>N112 secondary air inlet valve</td>
+              <td class="mono">No.10/6</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
             <tr>
               <td class="mono">T121/117, T121/118</td>
-              <td>Throttle drive module channels (J338)</td>
+              <td>J338 throttle valve module drive channels</td>
               <td class="mono">No.10/9</td>
               <td><span class="status high">Factory-Confirmed</span></td>
             </tr>
@@ -725,7 +678,7 @@ OBD7 -> T121/43 (K-line)</pre>
             </tr>
             <tr>
               <td>5</td>
-              <td>Validate `3/21/62` behavior on this exact ECU</td>
+              <td>Resolve functional role of `T121/21` and `T121/121` before promoting them to mandatory power paths</td>
               <td class="mono">[ ]</td>
             </tr>
           </tbody>
