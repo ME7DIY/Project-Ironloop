@@ -208,6 +208,48 @@
   .box li:last-child { border-bottom: none; }
   .box li::before { content: '> '; color: var(--accent); }
 
+  .diagram-panel {
+    margin-top: 0.95rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.8rem 0.9rem;
+  }
+  .diagram-cta {
+    display: inline-block;
+    margin-top: 0.65rem;
+    border: 1px solid rgba(232,83,10,0.45);
+    background: rgba(232,83,10,0.12);
+    color: #ffc89b;
+    padding: 0.5rem 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .diagram-cta:hover {
+    color: #0a0b0d;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .diagram-frame {
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    background: #05070b;
+    overflow: hidden;
+  }
+  .diagram-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .diagram-note {
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+  }
+
   a {
     color: #8abde6;
     text-decoration: none;
@@ -385,6 +427,18 @@ PSU - -> GROUND_RAIL -> T121/1
 
 OBD7 -> T121/43 (K-line)</pre>
           </div>
+        </div>
+        <div class="diagram-panel">
+          <p class="sub">
+            Clean web-safe export added for quick wiring review and zoom without raster blur.
+          </p>
+          <a class="diagram-cta" href="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" target="_blank" rel="noopener noreferrer">
+            Open Full-Size Safe SVG
+          </a>
+          <div class="diagram-frame">
+            <img src="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" alt="Project Ironloop ME7 harness safe SVG">
+          </div>
+          <p class="diagram-note">Path: Pinout Diagrams/Project-Ironloop-safe-web.svg</p>
         </div>
       </div>
     </section>
