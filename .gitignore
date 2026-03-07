@@ -154,3 +154,14 @@ CMakeFiles/
 Thumbs.db
 .DS_Store
 *.swp
+
+# Project-Ironloop local artifacts
+.tools/
+Source/Phase-01-EngineSimPatch/logs/
+
+# Temporary diagram export variants (keep safe-web.svg tracked)
+docs/guides/Pinout Diagrams/Project-Ironloop-original.svg
+docs/guides/Pinout Diagrams/Project-Ironloop-readable-web.svg
+docs/guides/Pinout Diagrams/project-ironloop-svg-compare.html
+Guides/Pinout Diagrams/Project-Ironloop-readable-web.svg
+Guides/Pinout Diagrams/project-ironloop-svg-compare.html
