@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRONLOOP - ME7 Bench Core Quickstart Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --green: #0cf07a;
+    --red: #f04a4a;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.55) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.2rem 3rem;
+  }
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0 1.2rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .title {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 6vw, 3.4rem);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .title span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
+  .sub {
+    margin-top: 0.8rem;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  .callout {
+    margin-top: 0.9rem;
+    border: 1px solid rgba(232,83,10,0.35);
+    background: rgba(232,83,10,0.08);
+    color: #efc6a6;
+    padding: 0.65rem 0.8rem;
+    font-family: var(--mono);
+    font-size: 0.67rem;
+    letter-spacing: 0.04em;
+  }
+  .sec {
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(165deg, var(--surface), var(--surface2));
+  }
+  .sec-hd {
+    border-bottom: 1px solid var(--border);
+    padding: 0.66rem 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .sec-title {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1.05rem;
+  }
+  .sec-tag {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    border: 1px solid rgba(74,85,104,0.65);
+    padding: 0.18rem 0.42rem;
+    white-space: nowrap;
+  }
+  .sec-bd { padding: 0.78rem 0.82rem 0.88rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding: 0.45rem 0.35rem;
+  }
+  td {
+    border-bottom: 1px solid rgba(30,37,48,0.55);
+    padding: 0.48rem 0.35rem;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .mono { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+  pre {
+    margin-top: 0.45rem;
+    padding: 0.72rem;
+    border: 1px solid var(--border);
+    background: rgba(7,10,14,0.65);
+    color: #a8bacd;
+    font-size: 0.75rem;
+    font-family: var(--mono);
+    overflow: auto;
+    line-height: 1.35;
+  }
+  ol { margin-left: 1rem; }
+  li { margin: 0.3rem 0; }
+  .ok { color: var(--green); }
+  .stop { color: var(--red); }
+  .footer {
+    margin-top: 1.1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.65rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  a {
+    color: #8abde6;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(138,189,230,0.45);
+  }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Project IRONLOOP / Bench Run Card</div>
+      <h1 class="title">ME7 Core Quickstart <span>First Power + First K-line</span></h1>
+      <p class="sub">Use this card during bench bring-up. This is intentionally short and operational.</p>
+      <div class="callout">Scope: ECU wake-up and communication only. No sensor simulation required for this stage.</div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Required Pins Only</div>
+        <div class="sec-tag">No Extras</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Connector</th>
+              <th>Pin</th>
+              <th>Role</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">T121</td><td class="mono">1, 2</td><td>Ground</td><td>Both to common ground rail.</td></tr>
+            <tr><td class="mono">T121</td><td class="mono">62</td><td>KL30 +12V</td><td>Fused constant supply.</td></tr>
+            <tr><td class="mono">T121</td><td class="mono">3</td><td>KL15 +12V</td><td>Fused switched supply path.</td></tr>
+            <tr><td class="mono">T121</td><td class="mono">43</td><td>K-line</td><td>To OBD T16/7.</td></tr>
+            <tr><td class="mono">T16 (OBD)</td><td class="mono">4, 5</td><td>Ground</td><td>Common with ECU ground rail.</td></tr>
+            <tr><td class="mono">T16 (OBD)</td><td class="mono">16</td><td>+12V supply</td><td>Fused +30 to scanner/interface.</td></tr>
+            <tr><td class="mono">T16 (OBD)</td><td class="mono">7</td><td>K-line</td><td>Direct link to ECU T121/43.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Minimal Wiring Map</div>
+        <div class="sec-tag">Bring-Up</div>
+      </div>
+      <div class="sec-bd">
+<pre>PSU +12V -> Fuse -> T121/62
+PSU +12V -> Switch -> Fuse -> T121/3
+PSU GND  -> Ground rail -> T121/1, T121/2
+
+OBD T16/16 -> +12V fused
+OBD T16/4, T16/5 -> Ground rail
+OBD T16/7 -> T121/43</pre>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">10-Minute Test Flow</div>
+        <div class="sec-tag">Pass / Fail</div>
+      </div>
+      <div class="sec-bd">
+        <ol>
+          <li>Power OFF. Do continuity checks and ensure no +12V-to-ground shorts.</li>
+          <li>Set PSU current limit low (safe bring-up level).</li>
+          <li>Apply KL30 (`T121/62`) and OBD power (`T16/16`).</li>
+          <li>Enable switched feed (`T121/3`).</li>
+          <li>Connect K-line tool at OBD and attempt ECU identification/read.</li>
+        </ol>
+        <p class="sub"><span class="ok">PASS:</span> ECU responds over K-line and stays stable.</p>
+        <p class="sub"><span class="stop">STOP:</span> Unexpected current draw, hot wiring, no comms after verified wiring.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Use After This Card</div>
+        <div class="sec-tag">Next</div>
+      </div>
+      <div class="sec-bd">
+        <p class="sub">
+          Continue in the full references:
+          <a href="pinout-diagrams-8e0-909-518-ak-me7-5-0004.html">ME7.5 AK Pinout Guide</a>
+          and
+          <a href="pinout-golden-worksheet-8e0-909-518-ak.html">Golden Pinout Worksheet</a>.
+        </p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>Project IRONLOOP / ME7 Bench Core Quickstart</span>
+      <span><a href="index.html">Back To Guides Index</a></span>
+    </div>
+  </div>
+</body>
+</html>
