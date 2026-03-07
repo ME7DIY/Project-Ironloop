@@ -25,3 +25,6 @@ Purpose: Daily, short progress entries that track what changed and why.
   - `--rate-min-dt` default set to `0.003`
   - `--rate-tolerance` default set to `0.10` (10%)
   - strict validation still available with `--rate-source config`
+- Commit `55eff6c`: updated ME7 bench order guide with AK pin-confidence workflow (scope: docs/guides).
+- Added reusable git safety process doc: `docs/roadmap/git-safety-cleanup-playbook.md`.
+- Committed to logging every scoped commit in this progression file to keep history clear and prevent drift.
