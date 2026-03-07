@@ -29,3 +29,5 @@ Purpose: Daily, short progress entries that track what changed and why.
 - Added reusable git safety process doc: `docs/roadmap/git-safety-cleanup-playbook.md`.
 - Committed to logging every scoped commit in this progression file to keep history clear and prevent drift.
 - Updated `docs/handoffs/HANDOFF.md` with persistent collaboration memory: agent handles git stage/commit/push by default and logs each scoped commit here.
+- Added new breakout wiring execution guide: `docs/guides/me7-breakout-output-tie-map-8e0-909-518-ak.html`.
+- Linked the breakout tie map from `docs/guides/index.html` and `docs/guides/pinout-diagrams-8e0-909-518-ak-me7-5-0004.html`.

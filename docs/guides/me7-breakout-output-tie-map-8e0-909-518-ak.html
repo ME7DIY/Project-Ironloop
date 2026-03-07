@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRONLOOP - Breakout Output Tie Map (8E0 909 518 AK)</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --surface: #111318;
+    --surface2: #181c23;
+    --border: #1e2530;
+    --accent: #e8530a;
+    --accent2: #f0920a;
+    --green: #0cf07a;
+    --blue: #0ab4f0;
+    --red: #f04a4a;
+    --text: #c8d4e0;
+    --text-dim: #6b7a8d;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,21,33,0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,21,33,0.55) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 3.2rem 0 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.2rem, 7.5vw, 4.6rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .title span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+  .sub {
+    margin-top: 1rem;
+    max-width: 930px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  .callout {
+    margin-top: 1rem;
+    border: 1px solid rgba(240,146,10,0.35);
+    background: rgba(240,146,10,0.08);
+    padding: 0.75rem 0.9rem;
+    color: #dfbf89;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+  .callout.red {
+    border-color: rgba(240,74,74,0.35);
+    background: rgba(240,74,74,0.1);
+    color: #f6b2b2;
+  }
+
+  .sec {
+    margin-top: 1.2rem;
+    border: 1px solid var(--border);
+    background: linear-gradient(165deg, var(--surface), var(--surface2));
+  }
+  .sec-hd {
+    border-bottom: 1px solid var(--border);
+    padding: 0.78rem 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .sec-title {
+    font-family: var(--display);
+    font-size: 1.24rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .sec-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    border: 1px solid rgba(74,85,104,0.65);
+    color: var(--text-dim);
+    padding: 0.22rem 0.5rem;
+    white-space: nowrap;
+  }
+  .sec-bd {
+    padding: 0.82rem 0.95rem 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding: 0.52rem 0.45rem;
+  }
+  td {
+    vertical-align: top;
+    border-bottom: 1px solid rgba(30,37,48,0.55);
+    padding: 0.58rem 0.45rem;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid;
+    padding: 0.18rem 0.4rem;
+  }
+  .locked { color: var(--green); border-color: rgba(12,240,122,0.35); background: rgba(12,240,122,0.08); }
+  .partial { color: var(--accent2); border-color: rgba(240,146,10,0.35); background: rgba(240,146,10,0.08); }
+  .hold { color: var(--red); border-color: rgba(240,74,74,0.35); background: rgba(240,74,74,0.08); }
+
+  .mono {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--text-dim);
+  }
+
+  ul, ol {
+    margin-left: 1.2rem;
+    color: var(--text-dim);
+  }
+  li { margin: 0.3rem 0; }
+
+  a {
+    color: #8abde6;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(138,189,230,0.45);
+  }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .footer {
+    margin-top: 1.35rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Project IRONLOOP / Wiring Execution Map</div>
+      <h1 class="title">Breakout Output Tie Map <span>8E0 909 518 AK</span></h1>
+      <p class="sub">
+        This guide turns the breakout-board diagram into a practical tie-in table:
+        exactly what you can wire now, what is partially locked, and what should stay disconnected
+        until additional ElsaWin extraction is complete.
+      </p>
+      <div class="callout">
+        Scope: MCP4728 + dual MCP4131 outputs into the ECU sensor layer. Core power/K-line rails are covered in the
+        <a href="me7-bench-core-quickstart-card.html">ME7 Bench Core Quickstart</a>.
+      </div>
+      <div class="callout red">
+        Safety gate: keep PSU current-limited for first sensor tie-in tests. Do not energize unresolved signal lines.
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Board Channel Mapping (Software Side)</div>
+        <div class="sec-tag">From Bridge Code</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Bridge Channel</th>
+              <th>Breakout Pin</th>
+              <th>Current Software State</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">TPS voltage</td>
+              <td class="mono">MCP4728 channel_a (OUTA)</td>
+              <td>Implemented in bridge output path.</td>
+            </tr>
+            <tr>
+              <td class="mono">MAP voltage</td>
+              <td class="mono">MCP4728 channel_b (OUTB)</td>
+              <td>Implemented in bridge output path.</td>
+            </tr>
+            <tr>
+              <td class="mono">Narrowband O2 voltage</td>
+              <td class="mono">MCP4728 channel_c (OUTC)</td>
+              <td>Implemented in bridge output path.</td>
+            </tr>
+            <tr>
+              <td class="mono">ECT resistance proxy</td>
+              <td class="mono">MCP4131 (single active pot path today)</td>
+              <td>Implemented as one pot write path (ECT proxy).</td>
+            </tr>
+            <tr>
+              <td class="mono">IAT resistance path</td>
+              <td class="mono">Second MCP4131 planned</td>
+              <td>Planned in wiring diagram; software support still to be split into dual-pot controls.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">ECU Tie-In Matrix (Do This In Order)</div>
+        <div class="sec-tag">AK Pin Workflow</div>
+      </div>
+      <div class="sec-bd">
+        <table>
+          <thead>
+            <tr>
+              <th>Signal</th>
+              <th>Breakout Output</th>
+              <th>ECU Pin Target</th>
+              <th>Status</th>
+              <th>Action Now</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MAP (G31)</td>
+              <td class="mono">MCP4728 OUTB</td>
+              <td class="mono">T121/101 (signal)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Safe first analog tie-in candidate (with shared ground reference and current-limited power).</td>
+            </tr>
+            <tr>
+              <td>IAT (G42)</td>
+              <td class="mono">MCP4131 #2 P0W/P0B as rheostat</td>
+              <td class="mono">T121/85 (signal) + companion return pin</td>
+              <td><span class="status partial">Partial</span></td>
+              <td>Signal pin is confirmed; companion/return pairing must be lifted from Elsa page before final tie.</td>
+            </tr>
+            <tr>
+              <td>ECT (G62)</td>
+              <td class="mono">MCP4131 #1 P0W/P0B as rheostat</td>
+              <td class="mono">T121/93 (signal) + companion return pin</td>
+              <td><span class="status partial">Partial</span></td>
+              <td>Signal pin is confirmed; complete two-wire sender pair must be verified before hard wiring.</td>
+            </tr>
+            <tr>
+              <td>TPS (throttle track)</td>
+              <td class="mono">MCP4728 OUTA</td>
+              <td class="mono">Track set not fully locked for AK yet</td>
+              <td><span class="status hold">Hold</span></td>
+              <td>Do not hard-wire yet. Confirm exact AK throttle-track pins and plausibility strategy first.</td>
+            </tr>
+            <tr>
+              <td>Narrowband O2</td>
+              <td class="mono">MCP4728 OUTC</td>
+              <td class="mono">Signal pin not finalized in AK worksheet</td>
+              <td><span class="status hold">Hold</span></td>
+              <td>Keep disconnected until exact O2 signal/return pin pair is confirmed from Elsa extraction.</td>
+            </tr>
+            <tr>
+              <td>Spare analog</td>
+              <td class="mono">MCP4728 OUTD</td>
+              <td class="mono">None (reserved)</td>
+              <td><span class="status hold">Reserved</span></td>
+              <td>Leave unconnected for now; reserve for future channel experiments.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Wiring Notes For Your Diagram</div>
+        <div class="sec-tag">Practical Details</div>
+      </div>
+      <div class="sec-bd">
+        <ol>
+          <li>Use one common ground reference between Pi, both breakouts, and ECU bench ground.</li>
+          <li>For each MCP4131 used as a variable resistor, treat it as a 2-terminal rheostat: use <span class="mono">P0W + P0B</span> (or <span class="mono">P0W + P0A</span>) and leave the third terminal open.</li>
+          <li>Keep each MCP4131 on shared SPI clock/data, but use separate chip-select lines so each pot can be addressed independently.</li>
+          <li>Bring up one channel at a time: MAP first, then temperature channels, then unresolved channels only after worksheet promotion.</li>
+          <li>Log every tie-in change in the roadmap progression log so diagram and bench wiring stay synchronized.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Next Elsa Extraction Targets</div>
+        <div class="sec-tag">To Unlock Held Channels</div>
+      </div>
+      <div class="sec-bd">
+        <ul>
+          <li>Finalize TPS track pin pair(s) for AK and determine minimum plausible emulation path.</li>
+          <li>Finalize narrowband O2 signal and return pins for AK (separate from heater/control paths).</li>
+          <li>Capture companion return pins for G42 and G62 two-wire thermistor emulation rows.</li>
+          <li>Promote resolved rows into <a href="pinout-golden-worksheet-8e0-909-518-ak.html">Golden Pinout Worksheet</a> before physically tying new outputs.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>Project IRONLOOP / Breakout Output Tie Map</span>
+      <span>
+        <a href="pinout-diagrams-8e0-909-518-ak-me7-5-0004.html">Back To Pinout Guide</a>
+        &nbsp;|&nbsp;
+        <a href="index.html">Guides Index</a>
+      </span>
+    </div>
+  </div>
+</body>
+</html>
