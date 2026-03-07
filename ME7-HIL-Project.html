@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project IRONLOOP — ME7 HIL Simulation</title>
+<title>Project IRONLOOP â€” ME7 HIL Simulation</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -73,7 +73,7 @@
     padding: 0 2rem;
   }
 
-  /* ── HERO ─────────────────────────────── */
+  /* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -169,7 +169,7 @@
     pointer-events: none;
   }
 
-  /* ── SECTION BASICS ──────────────────── */
+  /* â”€â”€ SECTION BASICS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   section {
     padding: 5rem 0;
     border-top: 1px solid var(--border);
@@ -196,7 +196,7 @@
     margin-bottom: 3rem;
   }
 
-  /* ── CONCEPT / LOOP DIAGRAM ──────────── */
+  /* â”€â”€ CONCEPT / LOOP DIAGRAM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .concept-plain {
     max-width: 760px;
     margin: -0.5rem 0 2rem;
@@ -312,7 +312,7 @@
     flex-shrink: 0;
   }
 
-  /* ── SENSORS TABLE ────────────────────── */
+  /* â”€â”€ SENSORS TABLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .sensor-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -359,7 +359,7 @@
   .diff-med { background: rgba(240,146,10,0.1); color: var(--accent2); border: 1px solid rgba(240,146,10,0.3); }
   .diff-hard { background: rgba(232,83,10,0.15); color: var(--accent); border: 1px solid rgba(232,83,10,0.4); }
 
-  /* ── HARDWARE TABLE ───────────────────── */
+  /* â”€â”€ HARDWARE TABLE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .hw-table {
     width: 100%;
     border-collapse: collapse;
@@ -409,7 +409,7 @@
     white-space: nowrap;
   }
 
-  /* ── PHASES ───────────────────────────── */
+  /* â”€â”€ PHASES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .phases {
     display: grid;
     gap: 1.5rem;
@@ -515,12 +515,12 @@
   }
 
   .task-list li::before {
-    content: '□';
+    content: 'â–¡';
     color: var(--accent);
     flex-shrink: 0;
   }
 
-  /* ── CODE BLOCK ───────────────────────── */
+  /* â”€â”€ CODE BLOCK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .code-block {
     background: #070a0f;
     border: 1px solid var(--border);
@@ -554,7 +554,7 @@
   .cmt { color: #4a5568; }
   .num { color: var(--accent2); }
 
-  /* ── AI SECTION ───────────────────────── */
+  /* â”€â”€ AI SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .ai-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -596,14 +596,7 @@
     color: var(--text-dim);
     line-height: 1.6;
   }
-
-  .ai-card .ai-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  /* ── FOOTER ───────────────────────────── */
+/* â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .footer {
     padding: 3rem 0;
     border-top: 1px solid var(--border);
@@ -646,14 +639,14 @@
     animation: pulse 2s ease infinite;
   }
 
-  /* ── DIVIDER ──────────────────────────── */
+  /* â”€â”€ DIVIDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .divider {
     border: none;
     border-top: 1px solid var(--border);
     margin: 2rem 0;
   }
 
-  /* ── ANIMATIONS ───────────────────────── */
+  /* â”€â”€ ANIMATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -664,7 +657,7 @@
     50% { opacity: 0.3; }
   }
 
-  /* ── NAV ──────────────────────────────── */
+  /* â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -818,10 +811,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="corner-label">HIL</div>
-    <div class="hero-eyebrow">Project IRONLOOP — Feasibility &amp; Scope Document</div>
+    <div class="hero-eyebrow">Project IRONLOOP â€” Feasibility &amp; Scope Document</div>
     <h1 class="hero-title">
       <span class="line1">Engine-Sim</span>
-      <span class="line2">× ME7 ECU</span>
+      <span class="line2">Ã— ME7 ECU</span>
     </h1>
     <p class="hero-sub">A DIY Hardware-in-the-Loop simulation rig bridging open-source combustion simulation to a real Bosch ME7.5 engine control unit via direct pin-level signal injection.</p>
     <div class="hero-tags">
@@ -841,7 +834,7 @@
     <h2 class="section-title">The Concept</h2>
 
     <p style="max-width:720px; color: var(--text-dim); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2.5rem;">
-      The goal is to close the loop between a virtual combustion engine running in <strong style="color:var(--text)">ange-yaghi/engine-sim</strong> and a real Bosch ME7.5 ECU sitting on a bench. The ECU receives electrically-accurate fake sensor signals generated from the simulation state. The ECU's outputs — injector timing, ignition advance, idle valve position — are read back and fed into the simulation, affecting engine behavior. This is what automotive engineers call a Hardware-in-the-Loop (HIL) rig. Professional versions cost $100k+. This version costs under $200.
+      The goal is to close the loop between a virtual combustion engine running in <strong style="color:var(--text)">ange-yaghi/engine-sim</strong> and a real Bosch ME7.5 ECU sitting on a bench. The ECU receives electrically-accurate fake sensor signals generated from the simulation state. The ECU's outputs â€” injector timing, ignition advance, idle valve position â€” are read back and fed into the simulation, affecting engine behavior. This is what automotive engineers call a Hardware-in-the-Loop (HIL) rig. Professional versions cost $100k+. This version costs under $200.
     </p>
 
     <div class="concept-plain">
@@ -856,7 +849,7 @@
           <div class="loop-line"></div>
         </div>
         <div class="loop-content green">
-          <h3>engine-sim — Virtual Engine</h3>
+          <h3>engine-sim â€” Virtual Engine</h3>
           <p>C++ simulation runs in real time. Outputs RPM, throttle %, manifold pressure, temperatures, lambda, and cam/crank timing. Patched to broadcast state via local socket every frame.</p>
         </div>
       </div>
@@ -867,7 +860,7 @@
           <div class="loop-line"></div>
         </div>
         <div class="loop-content">
-          <h3>Python Bridge — Pi 5</h3>
+          <h3>Python Bridge â€” Pi 5</h3>
           <p>Receives engine-sim state JSON. Converts each value to the correct real-world signal type. Dispatches analog voltages via DAC, resistance values via digital pot, and sends crank/cam timing to the Pico.</p>
         </div>
       </div>
@@ -878,8 +871,8 @@
           <div class="loop-line"></div>
         </div>
         <div class="loop-content">
-          <h3>Signal Boards — DAC + Digital Pot</h3>
-          <p>MCP4728 quad DAC generates real 0–5V analog voltages for TPS, MAP, MAF, O2. MCP4131 digital potentiometer fakes NTC thermistor curves for coolant and intake temp sensors.</p>
+          <h3>Signal Boards â€” DAC + Digital Pot</h3>
+          <p>MCP4728 quad DAC generates real 0â€“5V analog voltages for TPS, MAP, MAF, O2. MCP4131 digital potentiometer fakes NTC thermistor curves for coolant and intake temp sensors.</p>
         </div>
       </div>
 
@@ -889,7 +882,7 @@
           <div class="loop-line"></div>
         </div>
         <div class="loop-content">
-          <h3>Pico — Crank / Cam Signal Generator</h3>
+          <h3>Pico â€” Crank / Cam Signal Generator</h3>
           <p>Dedicated Raspberry Pi Pico uses PIO (Programmable I/O) state machines to generate a perfectly-timed 60-2 crank wheel signal and cam sync pulse at the exact frequency matching engine-sim's current RPM output.</p>
         </div>
       </div>
@@ -900,7 +893,7 @@
           <div class="loop-line"></div>
         </div>
         <div class="loop-content blue">
-          <h3>ME7.5 ECU — Real Hardware</h3>
+          <h3>ME7.5 ECU â€” Real Hardware</h3>
           <p>Receives all signals, believes it is running a live engine. Calculates fueling, ignition timing, boost targets, idle control. Fires real injector and ignition driver outputs.</p>
         </div>
       </div>
@@ -911,8 +904,8 @@
           <div class="loop-line last"></div>
         </div>
         <div class="loop-content green">
-          <h3>Read-Back → Close the Loop</h3>
-          <p>Python reads ECU outputs (injector pulse width, ignition advance angle, idle valve duty) via GPIO or K-Line. These feed back into engine-sim — e.g. more ignition advance = more torque = RPM climbs. Loop repeats at ~60Hz.</p>
+          <h3>Read-Back â†’ Close the Loop</h3>
+          <p>Python reads ECU outputs (injector pulse width, ignition advance angle, idle valve duty) via GPIO or K-Line. These feed back into engine-sim â€” e.g. more ignition advance = more torque = RPM climbs. Loop repeats at ~60Hz.</p>
         </div>
       </div>
 
@@ -924,24 +917,24 @@
     <div class="section-label">Signal Engineering</div>
     <h2 class="section-title">Sensors to Fake</h2>
 
-    <p style="color:var(--text-dim); font-size:0.9rem; max-width:680px; margin-bottom:1.5rem;">Every signal the ME7.5 expects must be electrically generated. Signals vary in type and timing precision required — analog voltage, resistance, and hard real-time digital pulses.</p>
+    <p style="color:var(--text-dim); font-size:0.9rem; max-width:680px; margin-bottom:1.5rem;">Every signal the ME7.5 expects must be electrically generated. Signals vary in type and timing precision required â€” analog voltage, resistance, and hard real-time digital pulses.</p>
 
     <div class="sensor-grid">
       <div class="sensor-card">
         <div class="sensor-name">TPS</div>
-        <div class="sensor-type">0–5V Analog</div>
+        <div class="sensor-type">0â€“5V Analog</div>
         <p style="font-size:0.82rem; color:var(--text-dim);">Throttle position. Linear voltage from closed to WOT. Direct DAC output.</p>
         <span class="sensor-diff diff-easy">Easy</span>
       </div>
       <div class="sensor-card">
         <div class="sensor-name">MAP</div>
-        <div class="sensor-type">0–5V Analog</div>
-        <p style="font-size:0.82rem; color:var(--text-dim);">Manifold absolute pressure. Linear 0.5–4.5V curve over 10–105 kPa range.</p>
+        <div class="sensor-type">0â€“5V Analog</div>
+        <p style="font-size:0.82rem; color:var(--text-dim);">Manifold absolute pressure. Linear 0.5â€“4.5V curve over 10â€“105 kPa range.</p>
         <span class="sensor-diff diff-easy">Easy</span>
       </div>
       <div class="sensor-card">
         <div class="sensor-name">MAF</div>
-        <div class="sensor-type">0–5V Analog</div>
+        <div class="sensor-type">0â€“5V Analog</div>
         <p style="font-size:0.82rem; color:var(--text-dim);">Mass air flow. Engine-sim models air mass per cycle, convert to sensor voltage curve.</p>
         <span class="sensor-diff diff-easy">Easy</span>
       </div>
@@ -959,26 +952,26 @@
       </div>
       <div class="sensor-card">
         <div class="sensor-name">O2 / Lambda</div>
-        <div class="sensor-type">0–1V Analog (Narrowband)</div>
+        <div class="sensor-type">0â€“1V Analog (Narrowband)</div>
         <p style="font-size:0.82rem; color:var(--text-dim);">Narrowband O2 output from engine-sim lambda value. Needs accurate switching behavior around stoich.</p>
         <span class="sensor-diff diff-med">Medium</span>
       </div>
       <div class="sensor-card">
         <div class="sensor-name">Cam Sync</div>
-        <div class="sensor-type">Digital Pulse — RPM Dependent</div>
+        <div class="sensor-type">Digital Pulse â€” RPM Dependent</div>
         <p style="font-size:0.82rem; color:var(--text-dim);">Single pulse per cam revolution. Must be precisely timed relative to crank signal.</p>
         <span class="sensor-diff diff-med">Medium</span>
       </div>
       <div class="sensor-card" style="border-left: 3px solid var(--accent);">
-        <div class="sensor-name">Crank — 60-2</div>
+        <div class="sensor-name">Crank â€” 60-2</div>
         <div class="sensor-type">Hard Real-Time Digital</div>
-        <p style="font-size:0.82rem; color:var(--text-dim);">60 tooth wheel with 2 missing teeth. Sub-millisecond timing at all RPM. <strong style="color:var(--accent)">This is the hardest signal.</strong> Handled by Pico PIO only — not soft PWM.</p>
+        <p style="font-size:0.82rem; color:var(--text-dim);">60 tooth wheel with 2 missing teeth. Sub-millisecond timing at all RPM. <strong style="color:var(--accent)">This is the hardest signal.</strong> Handled by Pico PIO only â€” not soft PWM.</p>
         <span class="sensor-diff diff-hard">Hard</span>
       </div>
     </div>
 
     <div class="highlight-box">
-      <p>The crank signal is the one thing that cannot tolerate jitter. Any timing error in the 60-2 pattern causes the ME7 to lose sync, throw a crank sensor fault, and cut fuel. The Raspberry Pi Pico's PIO subsystem is the key tool here — it runs independently of the ARM core at hardware speed and can generate the pattern with microsecond precision regardless of what Python is doing on the main CPU.</p>
+      <p>The crank signal is the one thing that cannot tolerate jitter. Any timing error in the 60-2 pattern causes the ME7 to lose sync, throw a crank sensor fault, and cut fuel. The Raspberry Pi Pico's PIO subsystem is the key tool here â€” it runs independently of the ARM core at hardware speed and can generate the pattern with microsecond precision regardless of what Python is doing on the main CPU.</p>
     </div>
   </section>
 
@@ -1001,7 +994,7 @@
             <div class="item-name">Main Computer</div>
             <span class="item-role">Runs Python bridge, engine-sim bridge, AI layer</span>
           </td>
-          <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">Raspberry Pi 5 — 8GB RAM</td>
+          <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">Raspberry Pi 5 â€” 8GB RAM</td>
           <td class="price">~$80</td>
         </tr>
         <tr>
@@ -1079,10 +1072,10 @@
         <div class="phase-header">
           <div class="phase-num">01</div>
           <div class="phase-title-wrap">
-            <div class="phase-title">Patch engine-sim — State Output</div>
+            <div class="phase-title">Patch engine-sim â€” State Output</div>
             <div class="phase-subtitle">C++ socket broadcast / JSON state stream</div>
           </div>
-          <span class="phase-badge badge-weekend">1–2 Weekends</span>
+          <span class="phase-badge badge-weekend">1â€“2 Weekends</span>
         </div>
         <div class="phase-body">
           <p>Fork ange-yaghi/engine-sim and add a local UDP or TCP socket broadcast. Every simulation frame, serialize the engine state to JSON and emit it. This gives the Python bridge a live feed of what the virtual engine is doing.</p>
@@ -1090,7 +1083,7 @@
             <li>Fork engine-sim repo, set up build environment (CMake + MSVC or GCC)</li>
             <li>Identify internal state variables: RPM, throttle %, MAP, MAF, coolant temp, lambda</li>
             <li>Add socket output to the main sim loop using platform socket API or Boost.Asio</li>
-            <li>Write Python test receiver — print state JSON to terminal, verify data looks correct</li>
+            <li>Write Python test receiver â€” print state JSON to terminal, verify data looks correct</li>
             <li>Document the JSON schema produced</li>
           </ul>
         </div>
@@ -1100,17 +1093,17 @@
         <div class="phase-header">
           <div class="phase-num">02</div>
           <div class="phase-title-wrap">
-            <div class="phase-title">Fake Easy Sensors — ECU Powers On</div>
+            <div class="phase-title">Fake Easy Sensors â€” ECU Powers On</div>
             <div class="phase-subtitle">DAC + digital pot outputs, ECU no-fault boot</div>
           </div>
-          <span class="phase-badge badge-weekend">2–3 Weekends</span>
+          <span class="phase-badge badge-weekend">2â€“3 Weekends</span>
         </div>
         <div class="phase-body">
           <p>Get the ME7 to power on without throwing sensor fault codes. Drive TPS, MAP, ECT, IAT signals from the simulation state and hook them into the ECU pins. Goal: ECU enters normal operating mode with no stored faults.</p>
           <ul class="task-list">
-            <li>Wire MCP4728 DAC to Raspberry Pi 5 via I2C — verify 0–5V range on multimeter</li>
-            <li>Wire MCP4131 digital pot — verify resistance range matches ME7 NTC expectations</li>
-            <li>Build Python voltage conversion functions for each sensor (e.g. MAP kPa → voltage)</li>
+            <li>Wire MCP4728 DAC to Raspberry Pi 5 via I2C â€” verify 0â€“5V range on multimeter</li>
+            <li>Wire MCP4131 digital pot â€” verify resistance range matches ME7 NTC expectations</li>
+            <li>Build Python voltage conversion functions for each sensor (e.g. MAP kPa â†’ voltage)</li>
             <li>Connect signals to ME7 bench harness on the correct pins (per ME7 pinout docs from nefmoto)</li>
             <li>Power on ECU, use VAG-KKL + nefmoto to read live data and fault codes</li>
             <li>Iterate until ECU shows valid sensor readings and no stored faults</li>
@@ -1122,24 +1115,24 @@
         <div class="phase-header">
           <div class="phase-num">03</div>
           <div class="phase-title-wrap">
-            <div class="phase-title">Crank &amp; Cam Signal — ECU Runs</div>
+            <div class="phase-title">Crank &amp; Cam Signal â€” ECU Runs</div>
             <div class="phase-subtitle">Pico PIO 60-2 pattern generation</div>
           </div>
-          <span class="phase-badge badge-weeks">3–6 Weeks</span>
+          <span class="phase-badge badge-weeks">3â€“6 Weeks</span>
         </div>
         <div class="phase-body">
           <p>The hardest phase. Write MicroPython + PIO assembly on the Pico to generate a perfect 60-2 crank wheel signal at variable RPM. Pi 5 sends RPM target to Pico over USB serial; Pico adjusts signal frequency in real time. Get ME7 to actually fire its injector drivers.</p>
           <ul class="task-list">
             <li>Write Pico PIO program for 60-2 tooth pattern generation</li>
             <li>Implement serial RPC: Pi 5 sends "RPM:3500\n", Pico recalculates tooth period and updates PIO clock divider</li>
-            <li>Add cam sync pulse — single pulse per crank revolution at correct phase offset</li>
-            <li>Connect signals to ME7 via resistor divider (ECU expects ~12V amplitude — level shift from Pico 3.3V)</li>
-            <li>Verify signal with logic analyzer — confirm 60-2 pattern and tooth timing</li>
-            <li>Watch ME7 injector outputs with oscilloscope — confirm injection pulses appear</li>
+            <li>Add cam sync pulse â€” single pulse per crank revolution at correct phase offset</li>
+            <li>Connect signals to ME7 via resistor divider (ECU expects ~12V amplitude â€” level shift from Pico 3.3V)</li>
+            <li>Verify signal with logic analyzer â€” confirm 60-2 pattern and tooth timing</li>
+            <li>Watch ME7 injector outputs with oscilloscope â€” confirm injection pulses appear</li>
           </ul>
 
           <div class="code-block">
-            <span class="code-label">pico_crank.py — PIO-based 60-2 generator concept</span>
+            <span class="code-label">pico_crank.py â€” PIO-based 60-2 generator concept</span>
             <pre><span class="kw">import</span> rp2, machine, utime
 <span class="kw">from</span> machine <span class="kw">import</span> UART
 
@@ -1172,20 +1165,20 @@ sm.active(<span class="num">1</span>)
         <div class="phase-header">
           <div class="phase-num">04</div>
           <div class="phase-title-wrap">
-            <div class="phase-title">Close the Loop — ECU Affects Simulation</div>
+            <div class="phase-title">Close the Loop â€” ECU Affects Simulation</div>
             <div class="phase-subtitle">Read ECU outputs, feed back to engine-sim</div>
           </div>
-          <span class="phase-badge badge-weeks">4–8 Weeks</span>
+          <span class="phase-badge badge-weeks">4â€“8 Weeks</span>
         </div>
         <div class="phase-body">
-          <p>Read the ECU's decisions back into the simulation. When the ECU advances timing by 5°, the virtual engine produces more torque and RPM climbs. When it enriches fueling, combustion efficiency changes. This is what makes the loop real.</p>
+          <p>Read the ECU's decisions back into the simulation. When the ECU advances timing by 5Â°, the virtual engine produces more torque and RPM climbs. When it enriches fueling, combustion efficiency changes. This is what makes the loop real.</p>
           <ul class="task-list">
             <li>Identify injector and ignition output pins on ME7 bench harness</li>
             <li>Use logic analyzer + Python to decode injector pulse width in real time</li>
             <li>Read ignition advance via K-Line using pyserial + KWP2000 live data mode</li>
-            <li>Build feedback model: injector PW + ignition advance → torque delta → RPM update in engine-sim</li>
+            <li>Build feedback model: injector PW + ignition advance â†’ torque delta â†’ RPM update in engine-sim</li>
             <li>Tune the feedback loop for stability (basic PID or low-pass filter on delta values)</li>
-            <li>Do a full end-to-end test: blip throttle in engine-sim → RPM climbs → ECU responds → simulation engine feels the change</li>
+            <li>Do a full end-to-end test: blip throttle in engine-sim â†’ RPM climbs â†’ ECU responds â†’ simulation engine feels the change</li>
           </ul>
         </div>
       </div>
@@ -1211,7 +1204,7 @@ sm.active(<span class="num">1</span>)
           </ul>
 
           <div class="code-block">
-            <span class="code-label">ai_tuner.py — RL training loop concept</span>
+            <span class="code-label">ai_tuner.py â€” RL training loop concept</span>
             <pre><span class="kw">from</span> stable_baselines3 <span class="kw">import</span> PPO
 <span class="kw">from</span> ironloop_env <span class="kw">import</span> ME7HilEnv  <span class="cmt"># our custom gym env</span>
 
@@ -1250,7 +1243,7 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
       </thead>
       <tbody>
         <tr>
-          <td><div class="item-name">engine-sim (forked)</div><span class="item-role">Virtual combustion engine — plant model</span></td>
+          <td><div class="item-name">engine-sim (forked)</div><span class="item-role">Virtual combustion engine â€” plant model</span></td>
           <td style="font-size:0.85rem; color:var(--text-dim);">Patched to emit state via socket</td>
           <td class="price">Free</td>
         </tr>
@@ -1286,8 +1279,8 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
         </tr>
         <tr>
           <td><div class="item-name">WinOLS / ECM Titanium</div><span class="item-role">Visual map editor for ME7 ROM</span></td>
-          <td style="font-size:0.85rem; color:var(--text-dim);">Optional — for manual map editing alongside AI</td>
-          <td class="price">$0–$1000</td>
+          <td style="font-size:0.85rem; color:var(--text-dim);">Optional â€” for manual map editing alongside AI</td>
+          <td class="price">$0â€“$1000</td>
         </tr>
       </tbody>
     </table>
@@ -1299,29 +1292,25 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
     <h2 class="section-title">The AI Layer</h2>
 
     <p style="color:var(--text-dim); font-size:0.9rem; max-width:700px; margin-bottom:2rem; line-height:1.9;">
-      Once the HIL loop is closed and stable, AI stops being a gimmick and starts being genuinely useful. The simulation can run headlessly at 10–50x real time, meaning an AI agent can explore the ECU map search space rapidly.
+      Once the HIL loop is closed and stable, AI stops being a gimmick and starts being genuinely useful. The simulation can run headlessly at 10â€“50x real time, meaning an AI agent can explore the ECU map search space rapidly.
     </p>
 
     <div class="ai-grid">
       <div class="ai-card">
-        <span class="ai-icon">⚡</span>
         <h4>Reinforcement Learning Tuning</h4>
         <p>RL agent treats each map cell as an action. Reward function = torque output minus penalties for knock risk and emissions. Runs thousands of virtual dyno pulls to find optimal values.</p>
       </div>
       <div class="ai-card">
-        <span class="ai-icon">📡</span>
         <h4>Anomaly Detection</h4>
-        <p>Train a model on "healthy" HIL loop data. Deploy it to flag unusual ECU behavior — unexpected fueling corrections, erratic advance behavior — potentially catching faults before the ECU does.</p>
+        <p>Train a model on "healthy" HIL loop data. Deploy it to flag unusual ECU behavior â€” unexpected fueling corrections, erratic advance behavior â€” potentially catching faults before the ECU does.</p>
       </div>
       <div class="ai-card">
-        <span class="ai-icon">🗺️</span>
         <h4>Map Discovery in ROM Dumps</h4>
-        <p>Feed raw ME7 ROM binary into a pattern recognition model to auto-identify fuel maps, ignition tables, boost targets — useful for unknown or poorly-documented ECU variants.</p>
+        <p>Feed raw ME7 ROM binary into a pattern recognition model to auto-identify fuel maps, ignition tables, boost targets â€” useful for unknown or poorly-documented ECU variants.</p>
       </div>
       <div class="ai-card">
-        <span class="ai-icon">📊</span>
         <h4>Predictive Sensor Modeling</h4>
-        <p>Train surrogate models on logged HIL data so the simulation can predict what a real engine would do without running the full hardware loop — useful for rapid map screening.</p>
+        <p>Train surrogate models on logged HIL data so the simulation can predict what a real engine would do without running the full hardware loop â€” useful for rapid map screening.</p>
       </div>
     </div>
   </section>
@@ -1341,7 +1330,7 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
       <tbody>
         <tr>
           <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">nefmoto.com forums</td>
-          <td style="font-size:0.85rem; color:var(--text-dim);">15+ years of ME7 community knowledge — pinouts, boot mode entry, ROM format details, K-Line protocol implementation</td>
+          <td style="font-size:0.85rem; color:var(--text-dim);">15+ years of ME7 community knowledge â€” pinouts, boot mode entry, ROM format details, K-Line protocol implementation</td>
         </tr>
         <tr>
           <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">github.com/ange-yaghi/engine-sim</td>
@@ -1349,15 +1338,15 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
         </tr>
         <tr>
           <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">Raspberry Pi Pico PIO Guide (rp2040 datasheet ch. 3)</td>
-          <td style="font-size:0.85rem; color:var(--text-dim);">Essential reading for writing the crank signal PIO program — explains state machine architecture and clock divider math</td>
+          <td style="font-size:0.85rem; color:var(--text-dim);">Essential reading for writing the crank signal PIO program â€” explains state machine architecture and clock divider math</td>
         </tr>
         <tr>
           <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">MCP4728 datasheet (Microchip)</td>
-          <td style="font-size:0.85rem; color:var(--text-dim);">DAC specs, I2C address, voltage reference modes — needed to get accurate 0–5V sensor outputs</td>
+          <td style="font-size:0.85rem; color:var(--text-dim);">DAC specs, I2C address, voltage reference modes â€” needed to get accurate 0â€“5V sensor outputs</td>
         </tr>
         <tr>
           <td style="font-family:var(--mono); font-size:0.82rem; color:var(--blue);">stable-baselines3 docs</td>
-          <td style="font-size:0.85rem; color:var(--text-dim);">PPO and SAC implementations for the RL tuning agent — well documented with custom gym env examples</td>
+          <td style="font-size:0.85rem; color:var(--text-dim);">PPO and SAC implementations for the RL tuning agent â€” well documented with custom gym env examples</td>
         </tr>
       </tbody>
     </table>
@@ -1367,16 +1356,16 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
   <footer class="footer">
     <div class="footer-left">
       <strong style="color:var(--accent)">PROJECT IRONLOOP</strong><br>
-      ME7.5 × engine-sim Hardware-in-the-Loop Simulation<br>
+      ME7.5 Ã— engine-sim Hardware-in-the-Loop Simulation<br>
       <span>Est. Total Hardware Cost: ~$155 USD</span>
     </div>
     <div class="status-bar">
       <div class="status-item">
         <div class="status-dot"></div>
-        Phase 1 — Ready to Begin
+        Phase 1 â€” Ready to Begin
       </div>
       <div class="status-item" style="color: rgba(107,122,141,0.4);">
-        ■ Phase 5 — Future
+        â–  Phase 5 â€” Future
       </div>
     </div>
   </footer>
@@ -1411,3 +1400,4 @@ fuel_map, ign_map = env.<span class="fn">export_maps</span>()
 </script>
 </body>
 </html>
+
