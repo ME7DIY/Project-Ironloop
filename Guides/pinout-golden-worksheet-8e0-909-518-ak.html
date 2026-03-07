@@ -226,131 +226,231 @@
               <td class="mono">T121/1, T121/2</td>
               <td>Ground</td>
               <td class="required">Required</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/4 (J220 pins 1,2 -> earth point 83)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Core ECU grounds shown on Motronic current-supply page.</td>
             </tr>
             <tr>
               <td class="mono">T121/3</td>
               <td>KL15 switched +12V</td>
               <td class="required">Required</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/4 (J220 pin 3 via J271 / D52 15a path)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Switched-feed context confirmed on current-supply diagram.</td>
             </tr>
             <tr>
               <td class="mono">T121/62</td>
               <td>KL30 constant +12V</td>
               <td class="required">Required</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/4 (J220 pin 62 from D50 +30 path)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Constant-feed path visible on Motronic current-supply page.</td>
             </tr>
             <tr>
               <td class="mono">T121/43</td>
               <td>K-line diagnostics</td>
               <td class="required">Required</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/11 + No.11/2 (J220/43 -> A76 -> T16/7)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Hard-confirmed ECU K-line mapping.</td>
             </tr>
             <tr>
               <td class="mono">T121/21</td>
               <td>Relay/switched path</td>
               <td class="verify">Variant-sensitive</td>
-              <td class="mono">[fill]</td>
+              <td class="mono">Elsa No.10/4 (J220 pin 21 shown, function still unclear)</td>
               <td class="mono">[ ]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Do not mark as KL15 until exact function is traced in full current-flow set.</td>
             </tr>
             <tr>
               <td class="mono">T121/121</td>
               <td>Additional relay/power path</td>
               <td class="verify">Verify first</td>
-              <td class="mono">[fill]</td>
+              <td class="mono">Elsa No.10/11 (J220 pin 121 present, role unresolved)</td>
               <td class="mono">[ ]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Present in ignition-coils sheet; keep verify-flagged.</td>
             </tr>
             <tr>
               <td class="mono">T121/82, T121/90</td>
               <td>G28 crank speed</td>
               <td>Sensor layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/7 (G28)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Engine speed sender lines clearly labeled.</td>
             </tr>
             <tr>
               <td class="mono">T121/85</td>
               <td>G42 intake air temp</td>
               <td>Sensor layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/6 (G42)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Mapped in coolant/boost/IAT page.</td>
             </tr>
             <tr>
               <td class="mono">T121/93</td>
               <td>G62 coolant temp</td>
               <td>Sensor layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/6 (G62/G2 coolant sender group)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Coolant sender group shown on same ECU page.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/101</td>
+              <td>G31 charge air pressure (MAP)</td>
+              <td>Sensor layer</td>
+              <td class="mono">Elsa No.10/6 (G31)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Charge pressure sender shown with explicit ECU pin.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/86, T121/98</td>
+              <td>G40 Hall sender (cam)</td>
+              <td>Sensor layer</td>
+              <td class="mono">Elsa No.10/8 (G40)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Hall sender lines and ECU pins visible on cam/SAI page.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/106, T121/107</td>
+              <td>G61/G66 knock sensors</td>
+              <td>Sensor layer</td>
+              <td class="mono">Elsa No.10/7 (G61/G66)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Knock sensor channels explicitly shown.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/96,89,97,88</td>
+              <td>N30..N33 injectors</td>
+              <td>Actuator layer</td>
+              <td class="mono">Elsa No.10/5 (injectors 1..4)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Cylinder injector outputs are directly labeled.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/102,95,103,94</td>
+              <td>N70/N127/N291/N292 ignition coils</td>
+              <td>Actuator layer</td>
+              <td class="mono">Elsa No.10/11 (ignition coils page)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Coil output-stage lines mapped per cylinder.</td>
             </tr>
             <tr>
               <td class="mono">T121/104</td>
               <td>N75 wastegate regulator</td>
               <td>Actuator layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/6 (N75)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Charge pressure control solenoid valve mapped.</td>
             </tr>
             <tr>
               <td class="mono">T121/105</td>
               <td>N249 recirculating valve</td>
               <td>Actuator layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/6 (N249)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Turbocharger divert-air valve mapping confirmed.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/115</td>
+              <td>N205 inlet cam timing adjust valve</td>
+              <td>Actuator layer</td>
+              <td class="mono">Elsa No.10/8 (N205)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Cam timing adjustment valve output shown.</td>
+            </tr>
+            <tr>
+              <td class="mono">T121/64</td>
+              <td>N112 secondary air inlet valve</td>
+              <td>Actuator layer</td>
+              <td class="mono">Elsa No.10/6 (N112)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>SAI valve output shown in same page as N75/N249.</td>
             </tr>
             <tr>
               <td class="mono">T121/117, T121/118</td>
               <td>G186 throttle drive motor</td>
               <td>Actuator layer</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.10/9 (J338 throttle module)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Throttle motor channels explicitly linked to ECU.</td>
             </tr>
             <tr>
               <td class="mono">T121/58, T121/60</td>
               <td>CAN-L / CAN-H</td>
               <td>Optional now</td>
-              <td class="mono">[fill]</td>
-              <td class="mono">[ ]</td>
+              <td class="mono">Elsa No.7/5 + 43/5 (J220 low/high bus)</td>
+              <td class="mono">[x]</td>
               <td class="mono">[ ] pass / [ ] fail</td>
               <td class="mono">[ ] pass / [ ] fail</td>
-              <td></td>
+              <td>Bus pins shown on dash-insert/gearbox sheets.</td>
+            </tr>
+            <tr>
+              <td class="mono">T16/4, T16/5</td>
+              <td>OBD grounds</td>
+              <td class="required">Required</td>
+              <td class="mono">Elsa No.11/2 (diagnostic connector)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Ground pins shown on T16 diagnostic page.</td>
+            </tr>
+            <tr>
+              <td class="mono">T16/7</td>
+              <td>OBD K-line</td>
+              <td class="required">Required</td>
+              <td class="mono">Elsa No.11/2 (A76 diagnosis wire K)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>K-line endpoint confirmed at diagnostic connector.</td>
+            </tr>
+            <tr>
+              <td class="mono">T16/16</td>
+              <td>OBD +30 supply</td>
+              <td class="required">Required</td>
+              <td class="mono">Elsa No.11/2 (via S12 10A / A57)</td>
+              <td class="mono">[x]</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td class="mono">[ ] pass / [ ] fail</td>
+              <td>Battery feed shown as fused +30 to T16/16.</td>
             </tr>
           </tbody>
         </table>

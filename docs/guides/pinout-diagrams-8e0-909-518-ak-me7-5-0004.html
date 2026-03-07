@@ -582,6 +582,109 @@ OBD7 -> T121/43 (K-line)</pre>
 
     <section class="sec">
       <div class="sec-hd">
+        <div class="sec-title">Factory-Confirmed (ElsaWin)</div>
+        <div class="sec-tag">Captured 2026-03-07</div>
+      </div>
+      <div class="sec-bd">
+        <p class="sub">
+          Confirmed from your ElsaWin current-flow captures (`No. 10/4..11`, `No. 11/2`, plus `No. 7/5` / `43/5`).
+          These are upgraded above community confidence and now carry explicit factory-page references.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Pin / Pins</th>
+              <th>Function</th>
+              <th>Elsa Diagram Ref</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">T121/1, T121/2</td>
+              <td>ECU grounds</td>
+              <td class="mono">No.10/4</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/3</td>
+              <td>Switched supply context (J271 / 15a path)</td>
+              <td class="mono">No.10/4</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/62</td>
+              <td>+30 constant supply context</td>
+              <td class="mono">No.10/4</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/43 + T16/7</td>
+              <td>K-line path (A76 diagnosis wire K)</td>
+              <td class="mono">No.10/11 + No.11/2</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T16/4, T16/5, T16/16</td>
+              <td>OBD grounds and +30 fused supply</td>
+              <td class="mono">No.11/2</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/82,90 / 106,107 / 86,98</td>
+              <td>Crank, knock, cam sensor groups</td>
+              <td class="mono">No.10/7 + No.10/8</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/85,93,101</td>
+              <td>IAT, coolant sender group, MAP</td>
+              <td class="mono">No.10/6</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/96,89,97,88</td>
+              <td>Injector outputs N30..N33</td>
+              <td class="mono">No.10/5</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/102,95,103,94</td>
+              <td>Ignition coil outputs</td>
+              <td class="mono">No.10/11</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/104,105,115,64</td>
+              <td>N75, N249, N205, N112 control outputs</td>
+              <td class="mono">No.10/6 + No.10/8</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/117, T121/118</td>
+              <td>Throttle drive module channels (J338)</td>
+              <td class="mono">No.10/9</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/58, T121/60</td>
+              <td>Low/High bus lines</td>
+              <td class="mono">No.7/5 + No.43/5</td>
+              <td><span class="status high">Factory-Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/21, T121/121</td>
+              <td>Present in captures, exact functional role still under review</td>
+              <td class="mono">No.10/4 + No.10/11</td>
+              <td><span class="status verify">Needs Functional Trace</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
         <div class="sec-title">Next Step Checklist</div>
         <div class="sec-tag">Bench Bring-Up</div>
       </div>
