@@ -245,27 +245,20 @@ The entire system runs at ~60 Hz, giving the ECU a live virtual engine to contro
 
 ```
 Project-Ironloop/
-├── ME7-HIL-Project.html          # Interactive project overview
-├── README.md                      # This file
-├── Research/                      # Extensive research & references
-│   ├── General-Reference/
-│   ├── Phase-01-EngineSimPatch/
-│   ├── Phase-02-FakeSensors/
-│   ├── Phase-03-CrankCamSignal/
-│   ├── Phase-04-CloseLoop/
-│   └── Phase-05-AITuning/
-├── Software/                      # Python, C++, MicroPython source (TBD)
-│   ├── engine-sim-bridge/        # Python receiver & signal generator
-│   ├── pico-firmware/            # PIO crank signal generator
-│   └── me7-diagnostics/          # K-Line reader / ECU output decoder
-├── Hardware/                      # Datasheets, schematics (TBD)
-│   ├── schematics/
-│   ├── pcb-layouts/
-│   └── bom/
-└── docs/                         # Detailed guides & tutorials (TBD)
-    ├── phase-guides/
-    ├── troubleshooting/
-    └── signal-reference/
+|-- README.md
+|-- Research/                      # Extensive research and references
+|   |-- General-Reference/
+|   |-- Phase-01-EngineSimPatch/
+|   |-- Phase-02-FakeSensors/
+|   |-- Phase-03-CrankCamSignal/
+|   |-- Phase-04-CloseLoop/
+|   `-- Phase-05-AITuning/
+|-- Source/                        # Engine sim patch + bridge code
+`-- docs/                          # GitHub Pages website (canonical)
+    |-- index.html
+    |-- guides/
+    |-- research/
+    `-- roadmap/
 ```
 
 ---
@@ -362,3 +355,4 @@ By working through IRONLOOP, you'll master:
 **Made by the IRONLOOP Community**
 
 *Last Updated: March 5, 2026*
+
