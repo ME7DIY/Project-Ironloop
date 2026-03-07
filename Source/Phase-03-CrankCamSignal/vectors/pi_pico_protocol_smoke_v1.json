@@ -1,0 +1,139 @@
+{
+  "name": "smoke_v1",
+  "protocol": "IRONLOOP-PICO-1",
+  "description": "Deterministic command/response smoke sequence for Pi<->Pico parser tests",
+  "steps": [
+    {
+      "index": 1,
+      "host_tx": "HELLO proto=IRONLOOP-PICO-1 client=pi5",
+      "expected_rx": [
+        "OK cmd=HELLO proto=IRONLOOP-PICO-1 fw=<version> state=IDLE"
+      ],
+      "expected_state": {
+        "state": "IDLE",
+        "rpm": 0,
+        "sync": 0
+      }
+    },
+    {
+      "index": 2,
+      "host_tx": "SET_RPM value=1200",
+      "expected_rx": [
+        "OK cmd=SET_RPM value=1200"
+      ],
+      "expected_state": {
+        "state": "IDLE",
+        "rpm": 1200,
+        "sync": 0
+      }
+    },
+    {
+      "index": 3,
+      "host_tx": "START",
+      "expected_rx": [
+        "OK cmd=START state=RUNNING"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 1200,
+        "sync": 1
+      }
+    },
+    {
+      "index": 4,
+      "host_tx": "STATUS",
+      "expected_rx": [
+        "STATUS state=RUNNING rpm=1200 sync=1 proto=IRONLOOP-PICO-1"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 1200,
+        "sync": 1
+      }
+    },
+    {
+      "index": 5,
+      "host_tx": "SET_RPM value=3400",
+      "expected_rx": [
+        "OK cmd=SET_RPM value=3400"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 3400,
+        "sync": 1
+      }
+    },
+    {
+      "index": 6,
+      "host_tx": "STATUS",
+      "expected_rx": [
+        "STATUS state=RUNNING rpm=3400 sync=1 proto=IRONLOOP-PICO-1"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 3400,
+        "sync": 1
+      }
+    },
+    {
+      "index": 7,
+      "host_tx": "SET_RPM value=99999",
+      "expected_rx": [
+        "ERR code=BAD_VALUE msg=rpm_out_of_range"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 3400,
+        "sync": 1
+      }
+    },
+    {
+      "index": 8,
+      "host_tx": "SETRPM value=1400",
+      "expected_rx": [
+        "ERR code=UNKNOWN_CMD msg=setrpm"
+      ],
+      "expected_state": {
+        "state": "RUNNING",
+        "rpm": 3400,
+        "sync": 1
+      }
+    },
+    {
+      "index": 9,
+      "host_tx": "STOP",
+      "expected_rx": [
+        "OK cmd=STOP state=IDLE"
+      ],
+      "expected_state": {
+        "state": "IDLE",
+        "rpm": 3400,
+        "sync": 0
+      }
+    },
+    {
+      "index": 10,
+      "host_tx": "STATUS",
+      "expected_rx": [
+        "STATUS state=IDLE rpm=3400 sync=0 proto=IRONLOOP-PICO-1"
+      ],
+      "expected_state": {
+        "state": "IDLE",
+        "rpm": 3400,
+        "sync": 0
+      }
+    },
+    {
+      "index": 11,
+      "host_tx": "PING t=1710000000000",
+      "expected_rx": [
+        "OK cmd=PING t=1710000000000"
+      ],
+      "expected_state": {
+        "state": "IDLE",
+        "rpm": 3400,
+        "sync": 0
+      }
+    }
+  ]
+}

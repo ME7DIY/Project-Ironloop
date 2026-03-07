@@ -155,6 +155,26 @@
     font-size: 0.95rem;
   }
 
+  .plan-link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-decoration: none;
+    border: 1px solid rgba(10,180,240,0.35);
+    background: rgba(10,180,240,0.08);
+    padding: 0.32rem 0.6rem;
+  }
+
+  .plan-link:hover {
+    color: var(--accent);
+    border-color: rgba(232,83,10,0.45);
+    background: rgba(232,83,10,0.08);
+  }
+
   .phase-strip {
     margin-top: 2rem;
     display: grid;
@@ -410,6 +430,8 @@
         End-to-end delivery path for IRONLOOP from software-only simulation output through bench hardware loop and
         AI-assisted map optimization. Phase 1 software is largely complete; Phase 1 hardware validation is still open.
       </p>
+      <a class="plan-link" href="./nohardware-3week-roadmap.md">Open No-Hardware 3-Week Roadmap</a>
+      <a class="plan-link" href="./roadmap-progression-log.md">Open Roadmap Progression Log</a>
 
       <div class="phase-strip">
         <article class="phase-strip-card">
