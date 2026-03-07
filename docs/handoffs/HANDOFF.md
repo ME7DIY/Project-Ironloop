@@ -3,7 +3,7 @@ Last updated: 2026-03-07 (America/Chicago)
 Owner: `kitza`
 Repo root: `C:\Users\kitza\Documents\Project-Ironloop`
 Branch: `main`
-Latest pushed commit: `b4fe4ab`
+Latest pushed commit: `9b2666e`
 
 ## 1) Project Mission
 Project IRONLOOP is a bench Hardware-in-the-Loop (HIL) system to connect:
@@ -118,6 +118,9 @@ Important process correction learned:
 - Assume current dirt is intentional unless user says otherwise.
 - Keep `docs/` as the only website source of truth.
 - Treat ECU pin claims as provisional unless backed by ElsaWin or equivalent primary docs.
+- User preference: the agent should handle staging/commits/pushes by default.
+- For every scoped commit, append one short bullet to `docs/roadmap/roadmap-progression-log.md`.
+- Use `docs/roadmap/git-safety-cleanup-playbook.md` as the default commit safety workflow.
 
 ## 10) Quick Continuation Prompt For New Chat
 Use this starter prompt in a new chat:
@@ -196,3 +199,4 @@ Option C (pinout evidence publish):
 - User is learning circuits from scratch; avoid jargon without plain-language translation.
 - Confidence claims on pinouts should be tied to ElsaWin evidence, not forum memory.
 - Keep momentum high with small wins and frequent concrete checkpoints.
+- User usually wants the agent to execute git actions directly (stage, commit, push) rather than manual user git steps.

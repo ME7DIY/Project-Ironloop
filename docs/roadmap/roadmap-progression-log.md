@@ -28,3 +28,4 @@ Purpose: Daily, short progress entries that track what changed and why.
 - Commit `55eff6c`: updated ME7 bench order guide with AK pin-confidence workflow (scope: docs/guides).
 - Added reusable git safety process doc: `docs/roadmap/git-safety-cleanup-playbook.md`.
 - Committed to logging every scoped commit in this progression file to keep history clear and prevent drift.
+- Updated `docs/handoffs/HANDOFF.md` with persistent collaboration memory: agent handles git stage/commit/push by default and logs each scoped commit here.
