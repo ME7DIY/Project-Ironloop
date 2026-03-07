@@ -480,6 +480,103 @@ OBD7 -> T121/43 (K-line)</pre>
 
     <section class="sec">
       <div class="sec-hd">
+        <div class="sec-title">Sensor / Actuator Pre-Map</div>
+        <div class="sec-tag">SS Evidence Set</div>
+      </div>
+      <div class="sec-bd">
+        <p class="sub">
+          This is the expanded pin list from the local SS comparison set. Treat these as cross-variant
+          medium-confidence mappings until validated against exact factory current-flow docs for this ECU context.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Pin / Pins</th>
+              <th>Signal / Device</th>
+              <th>Context</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">T121/82, T121/90</td>
+              <td>G28 Crank speed sensor</td>
+              <td>Engine speed input pair</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/85</td>
+              <td>G42 Intake air temperature</td>
+              <td>IAT sensor input</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/86</td>
+              <td>G40/G163 Cam position context</td>
+              <td>Variant-sensitive labeling by harness</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/93</td>
+              <td>G62 Coolant temperature</td>
+              <td>ECT sensor input</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/96,89,97,88</td>
+              <td>N30..N33 injector outputs</td>
+              <td>4-cylinder injector drive set</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/102,95,103,94</td>
+              <td>Ignition coil outputs</td>
+              <td>4-cylinder ignition drive set</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/104</td>
+              <td>N75 Wastegate regulator valve</td>
+              <td>Boost control output</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/105</td>
+              <td>N249 Recirculating valve</td>
+              <td>DV control output</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/106, T121/107</td>
+              <td>G61/G66 Knock sensors</td>
+              <td>Knock input channels</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/108</td>
+              <td>Sensor ground context</td>
+              <td>Referenced in multi-sensor return paths</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/117, T121/118</td>
+              <td>G186 Throttle drive motor</td>
+              <td>Electronic throttle output pair</td>
+              <td><span class="status mid">Medium</span></td>
+            </tr>
+            <tr>
+              <td class="mono">T121/121</td>
+              <td>J271 relay/power path appearance</td>
+              <td>Seen in set; validate exact AK behavior before use</td>
+              <td><span class="status verify">Verify</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-hd">
         <div class="sec-title">Next Step Checklist</div>
         <div class="sec-tag">Bench Bring-Up</div>
       </div>
