@@ -208,15 +208,15 @@
       <h1 class="title">Breakout Output Tie Map <span>8E0 909 518 AK</span></h1>
       <p class="sub">
         This guide turns the breakout-board diagram into a practical tie-in table:
-        exactly what you can wire now, what is partially locked, and what should stay disconnected
-        until additional ElsaWin extraction is complete.
+        exactly what is now locked for wiring, what is reserved, and what should be validated
+        during staged bench bring-up.
       </p>
       <div class="callout">
         Scope: MCP4728 + dual MCP4131 outputs into the ECU sensor layer. Core power/K-line rails are covered in the
         <a href="me7-bench-core-quickstart-card.html">ME7 Bench Core Quickstart</a>.
       </div>
       <div class="callout red">
-        Safety gate: keep PSU current-limited for first sensor tie-in tests. Do not energize unresolved signal lines.
+        Safety gate: keep PSU current-limited for first sensor tie-in tests. Do not energize any line not listed as locked or reserved.
       </div>
     </section>
 
@@ -292,30 +292,44 @@
             <tr>
               <td>IAT (G42)</td>
               <td class="mono">MCP4131 #2 P0W/P0B as rheostat</td>
-              <td class="mono">T121/85 (signal) + companion return pin</td>
-              <td><span class="status partial">Partial</span></td>
-              <td>Signal pin is confirmed; companion/return pairing must be lifted from Elsa page before final tie.</td>
+              <td class="mono">T121/85 (signal), return on sensor ground rail (T121/83)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Use P0W as signal node and P0B on the sensor-ground reference rail.</td>
             </tr>
             <tr>
               <td>ECT (G62)</td>
               <td class="mono">MCP4131 #1 P0W/P0B as rheostat</td>
-              <td class="mono">T121/93 (signal) + companion return pin</td>
-              <td><span class="status partial">Partial</span></td>
-              <td>Signal pin is confirmed; complete two-wire sender pair must be verified before hard wiring.</td>
+              <td class="mono">T121/93 (signal), return on sensor ground rail (T121/83)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Use P0W as signal node and P0B on the sensor-ground reference rail.</td>
             </tr>
             <tr>
-              <td>TPS (throttle track)</td>
-              <td class="mono">MCP4728 OUTA</td>
-              <td class="mono">Track set not fully locked for AK yet</td>
-              <td><span class="status hold">Hold</span></td>
-              <td>Do not hard-wire yet. Confirm exact AK throttle-track pins and plausibility strategy first.</td>
+              <td>TPS track 1</td>
+              <td class="mono">TPS1 output (dedicated analog output)</td>
+              <td class="mono">T121/84 (signal)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Add 1k series resistor inline before the ECU pin.</td>
             </tr>
             <tr>
-              <td>Narrowband O2</td>
+              <td>TPS track 2</td>
+              <td class="mono">TPS2 output (dedicated analog output)</td>
+              <td class="mono">T121/91 (signal)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Add 1k series resistor inline before the ECU pin.</td>
+            </tr>
+            <tr>
+              <td>Narrowband O2 (G39)</td>
               <td class="mono">MCP4728 OUTC</td>
-              <td class="mono">Signal pin not finalized in AK worksheet</td>
-              <td><span class="status hold">Hold</span></td>
-              <td>Keep disconnected until exact O2 signal/return pin pair is confirmed from Elsa extraction.</td>
+              <td class="mono">T121/68 (signal)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Add 1k series resistor inline before the ECU pin.</td>
+            </tr>
+            <tr>
+              <td>Sensor reference ground</td>
+              <td class="mono">Shared sensor-ground rail</td>
+              <td class="mono">T121/83 (sensor ground reference)</td>
+              <td><span class="status locked">Locked</span></td>
+              <td>Keep this rail separate from noisy ground loads; tie to main ground at one star point only.</td>
             </tr>
             <tr>
               <td>Spare analog</td>
@@ -336,10 +350,12 @@
       </div>
       <div class="sec-bd">
         <ol>
-          <li>Use one common ground reference between Pi, both breakouts, and ECU bench ground.</li>
-          <li>For each MCP4131 used as a variable resistor, treat it as a 2-terminal rheostat: use <span class="mono">P0W + P0B</span> (or <span class="mono">P0W + P0A</span>) and leave the third terminal open.</li>
+          <li>Use a dedicated <span class="mono">SENSOR GND</span> rail for analog returns and tie it to main ground at one single star point.</li>
+          <li>Tie ECU <span class="mono">T121/83</span>, MCP4728 <span class="mono">GND</span>, and both MCP4131 <span class="mono">P0B</span> returns to that sensor-ground rail.</li>
+          <li>For each MCP4131 used as a variable resistor, use <span class="mono">P0W + P0B</span> as the active two-terminal rheostat and leave <span class="mono">P0A</span> unconnected.</li>
           <li>Keep each MCP4131 on shared SPI clock/data, but use separate chip-select lines so each pot can be addressed independently.</li>
-          <li>Bring up one channel at a time: MAP first, then temperature channels, then unresolved channels only after worksheet promotion.</li>
+          <li>Add 1k series resistors on low-level analog output lines to ECU pins (<span class="mono">MAP/TPS/O2</span>).</li>
+          <li>Bring up one channel at a time: MAP first, then temperature channels, then TPS and O2 with live logging.</li>
           <li>Log every tie-in change in the roadmap progression log so diagram and bench wiring stay synchronized.</li>
         </ol>
       </div>
@@ -347,15 +363,16 @@
 
     <section class="sec">
       <div class="sec-hd">
-        <div class="sec-title">Next Elsa Extraction Targets</div>
-        <div class="sec-tag">To Unlock Held Channels</div>
+        <div class="sec-title">Next Bench Validation Targets</div>
+        <div class="sec-tag">After Lock-In</div>
       </div>
       <div class="sec-bd">
         <ul>
-          <li>Finalize TPS track pin pair(s) for AK and determine minimum plausible emulation path.</li>
-          <li>Finalize narrowband O2 signal and return pins for AK (separate from heater/control paths).</li>
-          <li>Capture companion return pins for G42 and G62 two-wire thermistor emulation rows.</li>
-          <li>Promote resolved rows into <a href="pinout-golden-worksheet-8e0-909-518-ak.html">Golden Pinout Worksheet</a> before physically tying new outputs.</li>
+          <li>Validate TPS dual-track plausibility under sweep with live logging on <span class="mono">T121/84</span> and <span class="mono">T121/91</span>.</li>
+          <li>Validate MAP response on <span class="mono">T121/101</span> against expected voltage table and rate limits.</li>
+          <li>Validate IAT/ECT emulation ranges on <span class="mono">T121/85</span> and <span class="mono">T121/93</span> against realistic thermistor curves.</li>
+          <li>Validate narrowband O2 signal behavior on <span class="mono">T121/68</span> after baseline idle run is stable.</li>
+          <li>Promote each live-validated row in the <a href="pinout-golden-worksheet-8e0-909-518-ak.html">Golden Pinout Worksheet</a>.</li>
         </ul>
       </div>
     </section>
