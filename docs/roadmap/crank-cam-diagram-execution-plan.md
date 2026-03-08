@@ -11,12 +11,32 @@ Scope: Build the crank/cam simulation layer into the advanced harness diagram wi
 - Keep decisions explicit so hardware purchases and bench wiring follow the same plan.
 
 ## Decision Gates (Must Lock Before Final Wiring)
-- [ ] Stim source choice locked:
-  - `Option A`: Raspberry Pi Pico (PIO firmware path)
-  - `Option B`: Ardu-Stim/JimStim style external stim board
+- [x] Stim source choice locked:
+  - `Primary`: Raspberry Pi Pico (PIO firmware path)
+  - `Secondary`: Ardu-Stim style external stim board (comparison/bring-up track)
 - [ ] ECU crank input electrical expectation confirmed for this ECU context (`VR` vs `Hall/TTL-level` path handling).
 - [ ] ECU cam input electrical expectation confirmed for this ECU context.
 - [ ] Conditioning/translation path locked (if required) for crank and cam outputs.
+
+## Board Lock Sheet (Fill Before Final Wiring)
+| Function | Candidate Board | Required Layout/Schematic | Status |
+|---|---|---|---|
+| Crank/Cam signal generator (primary path) | Raspberry Pi Pico (or Pico 2) | Pico pin header map and chosen output pins | LOCKED (primary) |
+| Crank/Cam signal generator (comparison path) | Ardu-Stim (Nano-based in current guide) | Ardu-Stim header/pinout for crank and cam outputs | LOCKED (secondary) |
+| Signal conditioning/translation (if needed) | VR/Hall conditioning module (TBD) | Module input/output header map and wiring mode | PROVISIONAL (await ECU input-mode lock) |
+| Timing verification instrument | 8+ channel logic analyzer (16ch preferred) | Channel map for crank, cam, and reference ground | LOCKED |
+
+## Architecture Lock (Current)
+1. Use `Pico` as the final intended crank/cam generator path.
+2. Use `Ardu-Stim` as a fast bring-up and A/B comparison path.
+3. Treat `VR/conditioning` as a dedicated follow-up decision after ECU crank/cam electrical mode is confirmed.
+4. Require logic-analyzer capture before promoting any crank/cam tie from provisional to locked.
+
+## Minimum Artifacts To Collect First
+1. Board front/back photos with header labels visible.
+2. Pinout sheet or manufacturer schematic PDF for each board.
+3. One locked "which exact header pin carries which signal" mapping per board.
+4. Voltage level notes for each output (`3.3V`, `5V`, differential VR-style, etc.).
 
 ## Diagram Build Phases
 ### Phase 1 - Block Layout (No final pin ties yet)
@@ -60,3 +80,7 @@ Scope: Build the crank/cam simulation layer into the advanced harness diagram wi
 - Created crank/cam working diagram copy:
   - `docs/guides/Harness Diagram/Advanced_Harness/Project-Ironloop_Advanced-CrankCam-Layer.drawio`
 - Initialized this execution plan to track decisions and wiring build order.
+- Locked baseline board selection:
+  - Primary generator: `Raspberry Pi Pico`
+  - Secondary generator: `Ardu-Stim`
+  - Measurement requirement: `logic analyzer (16ch preferred)`

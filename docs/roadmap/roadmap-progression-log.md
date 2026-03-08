@@ -40,3 +40,7 @@ Purpose: Daily, short progress entries that track what changed and why.
 - Added dedicated crank/cam diagram execution plan: `docs/roadmap/crank-cam-diagram-execution-plan.md`.
 - Created crank/cam working diagram copy: `docs/guides/Harness Diagram/Advanced_Harness/Project-Ironloop_Advanced-CrankCam-Layer.drawio`.
 - Locked a step-by-step build flow: decision gates -> layout -> ECU tie-in -> validation checklist.
+- Locked board-selection baseline for crank/cam work:
+  - `Pico` as primary generator path.
+  - `Ardu-Stim` as secondary comparison/bring-up path.
+  - `16ch logic analyzer preferred` as required timing-verification tool.
