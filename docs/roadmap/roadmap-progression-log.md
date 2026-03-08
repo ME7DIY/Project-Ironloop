@@ -35,3 +35,8 @@ Purpose: Daily, short progress entries that track what changed and why.
   - `T121/101` MAP, `T121/68` O2, `T121/93` ECT, `T121/85` IAT, `T121/84` + `T121/91` TPS tracks, `T121/83` sensor ground.
   - Updated `docs/guides/me7-breakout-output-tie-map-8e0-909-518-ak.html` from hold/partial rows to locked tie-in matrix + validation targets.
   - Updated `docs/guides/pinout-diagrams-8e0-909-518-ak-me7-5-0004.html`, `docs/guides/pinout-golden-worksheet-8e0-909-518-ak.html`, and guide index copy to match.
+
+## 2026-03-08
+- Added dedicated crank/cam diagram execution plan: `docs/roadmap/crank-cam-diagram-execution-plan.md`.
+- Created crank/cam working diagram copy: `docs/guides/Harness Diagram/Advanced_Harness/Project-Ironloop_Advanced-CrankCam-Layer.drawio`.
+- Locked a step-by-step build flow: decision gates -> layout -> ECU tie-in -> validation checklist.
