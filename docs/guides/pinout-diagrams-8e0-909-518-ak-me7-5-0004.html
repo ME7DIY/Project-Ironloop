@@ -214,6 +214,24 @@
     background: var(--surface);
     padding: 0.8rem 0.9rem;
   }
+  .diagram-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 0.7rem;
+  }
+  .diagram-item {
+    border: 1px solid var(--border);
+    background: rgba(7, 10, 14, 0.55);
+    padding: 0.7rem;
+  }
+  .diagram-item h3 {
+    font-family: var(--display);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
   .diagram-cta {
     display: inline-block;
     margin-top: 0.65rem;
@@ -274,6 +292,7 @@
 
   @media (max-width: 920px) {
     .split { grid-template-columns: 1fr; }
+    .diagram-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -445,15 +464,30 @@ OBD7 -> T121/43 (K-line)</pre>
         </div>
         <div class="diagram-panel">
           <p class="sub">
-            Clean web-safe export added for quick wiring review and zoom without raster blur.
+            Clean web-safe exports for both harness versions, kept side-by-side for quick review.
           </p>
-          <a class="diagram-cta" href="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" target="_blank" rel="noopener noreferrer">
-            Open Full-Size Safe SVG
-          </a>
-          <div class="diagram-frame">
-            <img src="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" alt="Project Ironloop ME7 harness safe SVG">
+          <div class="diagram-grid">
+            <div class="diagram-item">
+              <h3>Basic Harness (Safe SVG)</h3>
+              <a class="diagram-cta" href="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" target="_blank" rel="noopener noreferrer">
+                Open Full-Size Safe SVG
+              </a>
+              <div class="diagram-frame">
+                <img src="Pinout%20Diagrams/Project-Ironloop-safe-web.svg" alt="Project Ironloop ME7 basic harness safe SVG">
+              </div>
+              <p class="diagram-note">Path: Pinout Diagrams/Project-Ironloop-safe-web.svg</p>
+            </div>
+            <div class="diagram-item">
+              <h3>Advanced Harness (Safe SVG)</h3>
+              <a class="diagram-cta" href="Harness%20Diagram/Advanced_Harness/Project-Ironloop_Advanced-safe-web.svg" target="_blank" rel="noopener noreferrer">
+                Open Full-Size Safe SVG
+              </a>
+              <div class="diagram-frame">
+                <img src="Harness%20Diagram/Advanced_Harness/Project-Ironloop_Advanced-safe-web.svg" alt="Project Ironloop ME7 advanced harness safe SVG">
+              </div>
+              <p class="diagram-note">Path: Harness Diagram/Advanced_Harness/Project-Ironloop_Advanced-safe-web.svg</p>
+            </div>
           </div>
-          <p class="diagram-note">Path: Pinout Diagrams/Project-Ironloop-safe-web.svg</p>
         </div>
       </div>
     </section>
